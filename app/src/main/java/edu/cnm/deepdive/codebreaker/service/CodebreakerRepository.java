@@ -37,6 +37,7 @@ public class CodebreakerRepository {
   public Single<Game> getGame(String id) {
     return proxy
         .getGame(id)
+        .doOnSuccess(this::setGame)
         .subscribeOn(scheduler);
   }
 
@@ -44,4 +45,7 @@ public class CodebreakerRepository {
     return game;
   }
 
+  private void setGame(Game game) {
+    this.game = game;
+  }
 }
