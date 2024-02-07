@@ -82,7 +82,7 @@ public class Game {
 
   public boolean isSolved() {
     List<Guess> guesses = getGuesses();
-    return !guesses.isEmpty() && guesses.getLast().getCorrect() == length;
+    return !guesses.isEmpty() && guesses.get(guesses.size() - 1).getCorrect() == length;
   }
 
   private int codePointLength(String src) {
