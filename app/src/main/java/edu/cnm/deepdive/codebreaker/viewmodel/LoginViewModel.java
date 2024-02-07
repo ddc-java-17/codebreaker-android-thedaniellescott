@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package edu.cnm.deepdive.appstarter.viewmodel;
+package edu.cnm.deepdive.codebreaker.viewmodel;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,7 +29,7 @@ import androidx.lifecycle.ViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import dagger.hilt.android.qualifiers.ApplicationContext;
-import edu.cnm.deepdive.appstarter.service.GoogleSignInService;
+import edu.cnm.deepdive.codebreaker.service.GoogleSignInService;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import javax.inject.Inject;
 

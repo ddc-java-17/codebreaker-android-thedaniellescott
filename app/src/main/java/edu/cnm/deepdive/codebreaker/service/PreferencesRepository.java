@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package edu.cnm.deepdive.appstarter.service;
+package edu.cnm.deepdive.codebreaker.service;
 
 import android.content.Context;
 import android.content.SharedPreferences;

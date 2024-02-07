@@ -30,6 +30,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "android-app-starter"
+rootProject.name = "codebreaker-android"
 
 include(":app")

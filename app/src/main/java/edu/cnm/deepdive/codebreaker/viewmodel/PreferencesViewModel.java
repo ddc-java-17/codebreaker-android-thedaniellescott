@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package edu.cnm.deepdive.appstarter.viewmodel;
+package edu.cnm.deepdive.codebreaker.viewmodel;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -23,7 +23,7 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import dagger.hilt.android.qualifiers.ApplicationContext;
-import edu.cnm.deepdive.appstarter.service.PreferencesRepository;
+import edu.cnm.deepdive.codebreaker.service.PreferencesRepository;
 import javax.inject.Inject;
 import kotlin.jvm.functions.Function1;
 

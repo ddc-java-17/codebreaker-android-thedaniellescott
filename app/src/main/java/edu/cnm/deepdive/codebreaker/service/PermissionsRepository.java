@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package edu.cnm.deepdive.appstarter.service;
+package edu.cnm.deepdive.codebreaker.service;
 
 import android.app.Activity;
 import android.content.Context;
@@ -40,7 +40,7 @@ import javax.inject.Singleton;
  * checkPermissions(Activity, Set&lt;String&gt;, Set&lt;String&gt;)} and
  * {@link #handlePermissionsRequestResult(String[], int[])} methods are <em>not</em> thread-safe;
  * as a rule, those should be invoked only by an instance of
- * {@link edu.cnm.deepdive.appstarter.viewmodel.PermissionsViewModel}, which should in turn be
+ * {@link edu.cnm.deepdive.codebreaker.viewmodel.PermissionsViewModel}, which should in turn be
  * scoped to the main activity of the app.
  */
 @Singleton

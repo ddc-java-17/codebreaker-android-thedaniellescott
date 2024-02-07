@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package edu.cnm.deepdive.appstarter.service;
+package edu.cnm.deepdive.codebreaker.service;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -41,7 +41,7 @@ import javax.inject.Singleton;
  * token, and signing out. This class is implemented as a singleton, and the implementation is
  * thread-safe; however to minimize the risk of concurrency issues in the underlying Google Sign In
  * client library, this class should be consumed by a single viewmodel (e.g.
- * {@link edu.cnm.deepdive.appstarter.viewmodel.LoginViewModel}).
+ * {@link edu.cnm.deepdive.codebreaker.viewmodel.LoginViewModel}).
  */
 @SuppressWarnings("unused")
 @Singleton
