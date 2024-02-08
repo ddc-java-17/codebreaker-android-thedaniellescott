@@ -11,6 +11,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.codebreaker.viewmodel.CodebreakerViewModel;
 
+
 public class GameFragment extends Fragment {
 
   private FragmentGameBinding binding;
@@ -41,7 +42,7 @@ public class GameFragment extends Fragment {
     LifecycleOwner owner = getViewLifecycleOwner();
     viewModel
         .getGame()
-        .observe(owner, (game -> { /*  TODO Update UI for change of game.*/});
+        .observe(owner, (game) -> { /*  TODO Update UI for change of game.*/});
     viewModel
         .getGuess()
         .observe(owner,
