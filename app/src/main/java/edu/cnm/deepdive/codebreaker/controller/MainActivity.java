@@ -1,11 +1,13 @@
 package edu.cnm.deepdive.codebreaker.controller;
 
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.lifecycle.ViewModelProvider;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.codebreaker.R;
 import edu.cnm.deepdive.codebreaker.databinding.ActivityMainBinding;
@@ -23,6 +25,13 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     binding = ActivityMainBinding.inflate(getLayoutInflater());
     loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+    getLifecycle().addObserver(loginViewModel);
+    loginViewModel
+        .getAccount()
+        .observe(this, this::handleAccount);
+    loginViewModel
+        .getThrowable()
+            .observe(this, this::handleThrowable);
     setContentView(binding.getRoot());
   }
 
@@ -35,7 +44,25 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-    return super.onOptionsItemSelected(item);
+    boolean handled = true;
+    if (item.getItemId() == R.id.sign_out) {
+      loginViewModel.signOut();
+    } else {
+      handled = super.onOptionsItemSelected(item);
+    }
+    return handled;
+  }
+
+  private void handleAccount(GoogleSignInAccount account) {
+    if (account == null) {
+      Intent intent = new Intent(this, LoginActivity.class)
+          .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+      startActivity(intent);
+    }
+  }
+
+  private void handleThrowable(Throwable throwable) {
+
   }
 
 }
