@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
+import edu.cnm.deepdive.codebreaker.databinding.FragmentGameBinding;
 import edu.cnm.deepdive.codebreaker.viewmodel.CodebreakerViewModel;
 
 
@@ -46,7 +47,7 @@ public class GameFragment extends Fragment {
     viewModel
         .getGuess()
         .observe(owner,
-            (guess -> {/* TODO Update UI (list of guesses displayed) for new guess.*/});
+            (guess) -> {/* TODO Update UI (list of guesses displayed) for new guess.*/});
     viewModel
         .getInProgress()
         .observe(owner,

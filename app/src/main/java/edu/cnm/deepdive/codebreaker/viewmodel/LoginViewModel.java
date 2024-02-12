@@ -39,6 +39,7 @@ import javax.inject.Inject;
  * {@link #startSignIn(ActivityResultLauncher)}, {@link #completeSignIn(ActivityResult)}, and
  * {@link #signOut()} methods are provided to offload the sign-in flow from the UI controller.
  */
+
 @HiltViewModel
 public class LoginViewModel extends ViewModel implements DefaultLifecycleObserver {
 

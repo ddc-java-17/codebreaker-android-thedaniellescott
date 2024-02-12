@@ -13,7 +13,16 @@
     tools:ignore="AllowBackup,DataExtractionRules">
     <activity
       android:exported="false"
-      android:name=".controller.LoginActivity"/>
+      android:name=".controller.MainActivity"/>
+    <activity
+      android:exported="true"
+      android:name=".controller.LoginActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
   </application>
 
   <uses-permission android:name="android.permission.INTERNET"/>
