@@ -32,7 +32,7 @@ public final class CodebreakerServiceModule {
         .excludeFieldsWithoutExposeAnnotation()
         .create();
     HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-    interceptor.setLevel(Level.NONE);
+    interceptor.setLevel(Level.valueOf(context.getString(R.string.log_level)));
     OkHttpClient client = new OkHttpClient.Builder()
         .addInterceptor(interceptor)
         .build();

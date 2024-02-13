@@ -20,16 +20,20 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_weight="6"
+      android:textAlignment="center"
       android:text="@string/guess_header"
-      android:padding="@dimen/half_dynamic_spacing"/>
+      android:padding="@dimen/half_dynamic_spacing"
+      style="@style/AppTheme.GuessText.Centered.Title"/>
 
     <TextView
       android:id="@+id/correct_header"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_weight="3"
+      android:textAlignment="center"
       android:text="@string/correct_header"
-      android:padding="@dimen/half_dynamic_spacing"/>
+      android:padding="@dimen/half_dynamic_spacing"
+      style="@style/AppTheme.GuessText.Centered.Title"/>
 
     <TextView
       android:id="@+id/close_header"
@@ -37,7 +41,8 @@
       android:layout_height="wrap_content"
       android:layout_weight="3"
       android:text="@string/close_header"
-      android:padding="@dimen/half_dynamic_spacing"/>
+      android:padding="@dimen/half_dynamic_spacing"
+      style="@style/AppTheme.GuessText.Centered.Title"/>
 
   </LinearLayout>
 
@@ -47,6 +52,31 @@
     android:layout_height="0dp"
     android:orientation="vertical"
     app:layout_constraintTop_toBottomOf="@+id/column_headers"
-    app:layout_constraintBottom_toBottomOf="parent"/>
+    app:layout_constraintBottom_toTopOf="@id/guess"
+    tools:listitem="@layout/item_guesses"/>
+
+  <EditText
+    android:id="@+id/guess"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_dynamic_spacing"
+    android:inputType="text"
+    android:hint="@string/guess_hint"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/submit"
+    tools:ignore="Autofill"/>
+
+  <ImageButton
+    android:id="@+id/submit"
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    android:src="@drawable/send"
+    android:background="?selectableItemBackgroundBorderless"
+    android:layout_margin="@dimen/half_dynamic_spacing"
+    android:contentDescription="@string/submit_description"
+    app:layout_constraintTop_toTopOf="@id/guess"
+    app:layout_constraintBottom_toBottomOf="@id/guess"
+    app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
