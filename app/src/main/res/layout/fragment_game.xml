@@ -1,11 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:paddingVertical="@dimen/half_dynamic_spacing"
   tools:context=".controller.GameFragment">
 
-  <!-- TODO: Update blank fragment layout -->
+  <LinearLayout
+    android:id="@+id/column_headers"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent">
 
+    <TextView
+      android:id="@+id/guess_header"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="6"
+      android:text="@string/guess_header"
+      android:padding="@dimen/half_dynamic_spacing"/>
 
-</FrameLayout>
+    <TextView
+      android:id="@+id/correct_header"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="3"
+      android:text="@string/correct_header"
+      android:padding="@dimen/half_dynamic_spacing"/>
+
+    <TextView
+      android:id="@+id/close_header"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="3"
+      android:text="@string/close_header"
+      android:padding="@dimen/half_dynamic_spacing"/>
+
+  </LinearLayout>
+
+  <ListView
+    android:id="@+id/guesses"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    app:layout_constraintTop_toBottomOf="@+id/column_headers"
+    app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
