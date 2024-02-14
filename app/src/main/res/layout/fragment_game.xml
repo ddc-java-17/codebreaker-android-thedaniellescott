@@ -55,6 +55,17 @@
     app:layout_constraintBottom_toTopOf="@id/guess"
     tools:listitem="@layout/item_guesses"/>
 
+  <Spinner
+    android:id="@+id/color_selector"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:spinnerMode="dropdown"
+    android:layout_margin="@dimen/half_dynamic_spacing"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/guess"
+    app:layout_constraintTop_toTopOf="@id/guess"
+    app:layout_constraintBottom_toBottomOf="@id/guess"/>
+
   <EditText
     android:id="@+id/guess"
     android:layout_width="0dp"
@@ -62,7 +73,7 @@
     android:layout_margin="@dimen/half_dynamic_spacing"
     android:inputType="text"
     android:hint="@string/guess_hint"
-    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintStart_toEndOf="@id/color_selector"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@id/submit"
     tools:ignore="Autofill"/>

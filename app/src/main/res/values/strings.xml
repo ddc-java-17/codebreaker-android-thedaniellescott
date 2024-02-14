@@ -8,4 +8,6 @@
   <string name="close_header">Close</string>
   <string name="guess_hint">Text of guess (ABCDEF)</string>
   <string name="submit_description">Submit guess to service.</string>
+
+
 </resources>
