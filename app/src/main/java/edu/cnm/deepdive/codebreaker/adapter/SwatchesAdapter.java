@@ -24,10 +24,25 @@ public class SwatchesAdapter extends ArrayAdapter<String> {
   @NonNull
   @Override
   public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    return getView(position, convertView, parent, View.GONE);
+  }
+
+
+  @Override
+  public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    return getView(position, convertView, parent, View.VISIBLE);
+  }
+
+  @NonNull
+  private View getView(int position, @Nullable View convertView,
+      @NonNull ViewGroup parent, int labelVisibility) {
     ItemSwatchesBinding binding = (convertView == null)
         ? ItemSwatchesBinding.inflate(inflater, parent, false)
         : ItemSwatchesBinding.bind(convertView);
-    binding.getRoot().setColorFilter(colorValues[position]);
+    binding.swatch.setColorFilter(colorValues[position]);
+    binding.label.setText(getItem(position));
+    binding.label.setVisibility(labelVisibility);
     return binding.getRoot();
   }
+
 }
