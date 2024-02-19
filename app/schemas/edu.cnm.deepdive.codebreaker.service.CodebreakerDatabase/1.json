@@ -1,0 +1,105 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "d0ccf14d6544effc5bf47f675dd3cea6",
+    "entities": [
+      {
+        "tableName": "game_result",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`game_result_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `timestamp` INTEGER NOT NULL, `code_length` INTEGER NOT NULL, `guess_count` INTEGER NOT NULL, `duration` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "game_result_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "codeLength",
+            "columnName": "code_length",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "guessCount",
+            "columnName": "guess_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "duration",
+            "columnName": "duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "game_result_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_game_result_guess_count_duration",
+            "unique": false,
+            "columnNames": [
+              "guess_count",
+              "duration"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_result_guess_count_duration` ON `${TABLE_NAME}` (`guess_count`, `duration`)"
+          },
+          {
+            "name": "index_game_result_timestamp",
+            "unique": false,
+            "columnNames": [
+              "timestamp"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_result_timestamp` ON `${TABLE_NAME}` (`timestamp`)"
+          },
+          {
+            "name": "index_game_result_code_length",
+            "unique": false,
+            "columnNames": [
+              "code_length"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_result_code_length` ON `${TABLE_NAME}` (`code_length`)"
+          },
+          {
+            "name": "index_game_result_guess_count",
+            "unique": false,
+            "columnNames": [
+              "guess_count"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_result_guess_count` ON `${TABLE_NAME}` (`guess_count`)"
+          },
+          {
+            "name": "index_game_result_duration",
+            "unique": false,
+            "columnNames": [
+              "duration"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_result_duration` ON `${TABLE_NAME}` (`duration`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd0ccf14d6544effc5bf47f675dd3cea6')"
+    ]
+  }
+}
