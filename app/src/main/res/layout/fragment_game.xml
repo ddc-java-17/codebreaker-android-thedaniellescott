@@ -52,32 +52,20 @@
     android:layout_height="0dp"
     android:orientation="vertical"
     app:layout_constraintTop_toBottomOf="@+id/column_headers"
-    app:layout_constraintBottom_toTopOf="@id/guess"
+    app:layout_constraintBottom_toTopOf="@id/color_selectors"
     tools:listitem="@layout/item_guesses"/>
 
-  <Spinner
-    android:id="@+id/color_selector"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:spinnerMode="dropdown"
-    android:layout_margin="@dimen/half_dynamic_spacing"
-    android:background="@null"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/guess"
-    app:layout_constraintTop_toTopOf="@id/guess"
-    app:layout_constraintBottom_toBottomOf="@id/guess"/>
-
-  <EditText
-    android:id="@+id/guess"
+  <LinearLayout
+    android:id="@+id/color_selectors"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/half_dynamic_spacing"
-    android:inputType="text"
-    android:hint="@string/guess_hint"
-    app:layout_constraintStart_toEndOf="@id/color_selector"
-    app:layout_constraintBottom_toBottomOf="parent"
+    android:orientation="horizontal"
+    android:layout_marginHorizontal="@dimen/half_dynamic_spacing"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@id/submit"
-    tools:ignore="Autofill"/>
+    app:layout_constraintBottom_toBottomOf="parent">
+
+  </LinearLayout>
 
   <ImageButton
     android:id="@+id/submit"
@@ -87,8 +75,8 @@
     android:background="?selectableItemBackgroundBorderless"
     android:layout_margin="@dimen/half_dynamic_spacing"
     android:contentDescription="@string/submit_description"
-    app:layout_constraintTop_toTopOf="@id/guess"
-    app:layout_constraintBottom_toBottomOf="@id/guess"
+    app:layout_constraintTop_toTopOf="@id/color_selectors"
+    app:layout_constraintBottom_toBottomOf="@id/color_selectors"
     app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
