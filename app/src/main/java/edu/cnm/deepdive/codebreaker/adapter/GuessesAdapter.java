@@ -53,8 +53,14 @@ public class GuessesAdapter extends ArrayAdapter<Guess> {
     ItemGuessesBinding binding = (convertView == null)
         ? ItemGuessesBinding.inflate(inflater, parent, false)
         : ItemGuessesBinding.bind(convertView);
+
     binding.guess.removeAllViews();
     Guess guess = getItem(position);
+    guess.getContent()
+        .codePoints()
+            .forEach((codePoint) -> {
+
+            });
 
     // TODO: 2/19/2024 Iterate over characters of guess, using each to look up the color name and
     //  value from the maps above. Then, set tint of drawable to color value and add to container.
