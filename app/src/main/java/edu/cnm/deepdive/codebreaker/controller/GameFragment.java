@@ -69,6 +69,7 @@ public class GameFragment extends Fragment implements MenuProvider {
   public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
     boolean handled = true;
     if (menuItem.getItemId() == R.id.new_game) {
+      adapter = null;
       viewModel.startGame();
     } else {
       handled = false;
@@ -80,7 +81,6 @@ public class GameFragment extends Fragment implements MenuProvider {
     connectToViewModel();
     LifecycleOwner owner = getViewLifecycleOwner();
     observeGame(owner);
-    observeGuess(owner);
     observeInProgress(owner);
   }
 
@@ -93,35 +93,33 @@ public class GameFragment extends Fragment implements MenuProvider {
     viewModel
         .getGame()
         .observe(owner, (game) -> {
-          adapter = new GuessesAdapter(requireContext(), game.getGuesses());
-          binding.guesses.setAdapter(adapter);
-          createSpinners(game);
+          List<Guess> guesses = game.getGuesses();
+          if (adapter == null) {
+            adapter = new GuessesAdapter(requireContext(), guesses);
+            binding.guesses.setAdapter(adapter);
+            createSpinners(game);
+          }
+          adapter.notifyDataSetChanged();
+          binding.guesses.post(() -> binding.guesses.smoothScrollToPosition(guesses.size() - 1));
         });
-  }
-
-  private void observeGuess(LifecycleOwner owner) {
-    viewModel
-        .getGuess()
-        .observe(owner,
-            (guess) -> {
-              if (adapter != null) {
-                adapter.notifyDataSetChanged();
-                binding.guesses.setSelection(adapter.getCount() - 1);
-              }
-            });
   }
 
   private void observeInProgress(LifecycleOwner owner) {
     viewModel
         .getInProgress()
         .observe(owner,
-            (inProgress) -> { /*TODO Enable/Display controls on change of game state.*/});
+            (inProgress) -> {
+              int visibility = inProgress ? View.VISIBLE : View.INVISIBLE;
+              binding.colorSelectors.setVisibility(visibility);
+              binding.submit.setVisibility(visibility);
+            });
   }
 
   private void createSpinners(Game game) {
     int codeLength = game.getLength();
     List<Guess> guesses = game.getGuesses();
     String lastGuess = (guesses.isEmpty()) ? null : guesses.get(guesses.size() - 1).getContent();
+    // TODO: 2/20/2024 Use lastGuess to reset spinners to colors of lastGuess.
     Context context = requireContext();
     binding.colorSelectors.removeAllViews();
     for (int i = 0; i < codeLength; i++) {

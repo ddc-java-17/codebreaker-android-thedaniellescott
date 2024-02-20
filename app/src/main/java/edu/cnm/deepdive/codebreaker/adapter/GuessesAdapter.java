@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import edu.cnm.deepdive.codebreaker.R;
@@ -58,13 +59,14 @@ public class GuessesAdapter extends ArrayAdapter<Guess> {
     Guess guess = getItem(position);
     guess.getContent()
         .codePoints()
-            .forEach((codePoint) -> {
-
-            });
-
-    // TODO: 2/19/2024 Iterate over characters of guess, using each to look up the color name and
-    //  value from the maps above. Then, set tint of drawable to color value and add to container.
-    binding.guess.setText(guess.getContent());
+        .forEach((codePoint) -> {
+          ImageView swatch =
+              (ImageView) inflater.inflate(R.layout.item_guess_chars, binding.guess, false);
+          swatch.setContentDescription(colorNameLookup.get(codePoint));
+          //noinspection DataFlowIssue
+          swatch.setColorFilter(colorValueLookup.get(codePoint));
+          binding.guess.addView(swatch);
+        });
     binding.correct.setText(String.valueOf(guess.getCorrect()));
     binding.close.setText(String.valueOf(guess.getClose()));
     return binding.getRoot();

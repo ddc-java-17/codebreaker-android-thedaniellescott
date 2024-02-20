@@ -64,9 +64,7 @@
     android:layout_marginHorizontal="@dimen/half_dynamic_spacing"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@id/submit"
-    app:layout_constraintBottom_toBottomOf="parent">
-
-  </LinearLayout>
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
   <ImageButton
     android:id="@+id/submit"
