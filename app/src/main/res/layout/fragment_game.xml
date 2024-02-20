@@ -13,6 +13,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/half_dynamic_spacing"
     app:layout_constraintTop_toTopOf="parent">
 
     <TextView
@@ -73,7 +74,9 @@
     android:layout_height="0dp"
     android:src="@drawable/send"
     android:background="?selectableItemBackgroundBorderless"
-    android:layout_margin="@dimen/half_dynamic_spacing"
+    android:layout_marginStart="@dimen/half_dynamic_spacing"
+    android:layout_marginEnd="@dimen/full_dynamic_spacing"
+    android:layout_marginVertical="@dimen/half_dynamic_spacing"
     android:contentDescription="@string/submit_description"
     app:layout_constraintTop_toTopOf="@id/color_selectors"
     app:layout_constraintBottom_toBottomOf="@id/color_selectors"
