@@ -2,6 +2,7 @@ package edu.cnm.deepdive.codebreaker.service;
 
 import edu.cnm.deepdive.codebreaker.model.Game;
 import edu.cnm.deepdive.codebreaker.model.Guess;
+import edu.cnm.deepdive.codebreaker.model.entity.GameResult;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -48,4 +49,10 @@ public class CodebreakerRepository {
   private void setGame(Game game) {
     this.game = game;
   }
+
+  private GameResult toResult(Game game) {
+    GameResult result = new GameResult();
+
+  }
+
 }
