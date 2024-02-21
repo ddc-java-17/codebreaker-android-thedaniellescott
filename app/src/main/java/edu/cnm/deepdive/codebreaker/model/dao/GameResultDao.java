@@ -27,4 +27,12 @@ public interface GameResultDao {
   @Query(TRUNCATION_QUERY)
   Completable truncateResults();
 
+  default Single<GameResult> insertAndUpdate(GameResult gameResult) {
+    return insert(gameResult)
+        .map((id) -> {
+          gameResult.setId(id);
+          return gameResult;
+        });
+  }
+
 }
