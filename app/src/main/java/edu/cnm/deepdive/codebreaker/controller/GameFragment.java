@@ -61,6 +61,12 @@ public class GameFragment extends Fragment implements MenuProvider {
   }
 
   @Override
+  public void onDestroyView() {
+    binding = null;
+    super.onDestroyView();
+  }
+
+  @Override
   public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
     menuInflater.inflate(R.menu.game_options, menu);
   }

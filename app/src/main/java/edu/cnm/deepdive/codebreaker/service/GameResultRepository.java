@@ -20,11 +20,7 @@ public class GameResultRepository {
 
   public Single<GameResult> add(GameResult gameResult) {
     return gameResultDao
-        .insert(gameResult)
-        .map((id) -> {
-          gameResult.setId(id);
-          return gameResult;
-    })
+        .insertAndUpdate(gameResult)
         .subscribeOn(Schedulers.io());
   }
 
