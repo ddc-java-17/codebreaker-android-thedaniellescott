@@ -4,4 +4,4 @@
   android:id="@+id/settings_fragment_container"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:name="edu.cnm.deepdive.codebreaker.controller.SettingsActivity$SettingsFragment"/>
+  android:name="edu.cnm.deepdive.codebreaker.controller.SettingsFragment"/>

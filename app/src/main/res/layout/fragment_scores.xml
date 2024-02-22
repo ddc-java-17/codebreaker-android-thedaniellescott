@@ -90,6 +90,17 @@
       app:layout_constraintBottom_toBottomOf="parent"
       tools:listitem="@layout/item_game_results"/>
 
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/clear_scores"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:contentDescription="@string/clear_scores_description"
+    android:src="@drawable/delete"
+    app:useCompatPadding="true"
+    app:layout_constraintEnd_toEndOf="@id/game_results"
+    app:layout_constraintBottom_toBottomOf="@id/game_results"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

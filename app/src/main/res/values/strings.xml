@@ -1,11 +1,12 @@
 <resources>
   <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="login_failure_message">Unable to sign in with provided credentials.</string>
   <string name="sign_out">Sign out</string>
+
   <string name="guess_header">Guess</string>
   <string name="correct_header">Correct</string>
   <string name="close_header">Close</string>
+
   <string name="guess_hint">Text of guess (ABCDEF)</string>
   <string name="submit_description">Submit guess to service.</string>
   <string name="code_length_key">code_length</string>
@@ -17,6 +18,12 @@
   <string name="guess_count_header"># guesses</string>
   <string name="duration_header">Duration</string>
   <string name="timestamp_header">Date</string>
+  <string name="duration_format">%1$d:%2$02d:%3$02d.%4$03d</string>
+  <string name="game_fragment_label">@string/app_name</string>
+  <string name="scores_fragment_label">Scores</string>
+  <string name="settings_fragment_label">Settings</string>
+  <string name="go_to_scores_description">Go to scores screen</string>
+  <string name="clear_scores_description">Clear scores</string>
 
 
 </resources>

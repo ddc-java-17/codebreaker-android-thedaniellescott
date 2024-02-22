@@ -24,11 +24,13 @@ public class GameResultRepository {
         .subscribeOn(Schedulers.io());
   }
 
-  LiveData<List<GameResult>> getAll(int codeLength) {
+  public LiveData<List<GameResult>> getAll(int codeLength) {
     return gameResultDao.getRankedResults(codeLength);
   }
 
-  Completable clear() {
-    return gameResultDao.truncateResults();
+  public Completable clear() {
+    return gameResultDao
+        .truncateResults()
+        .subscribeOn(Schedulers.io());
   }
 }

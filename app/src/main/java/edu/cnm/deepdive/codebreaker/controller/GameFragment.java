@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.codebreaker.controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.codebreaker.R;
 import edu.cnm.deepdive.codebreaker.adapter.GuessesAdapter;
@@ -47,6 +50,10 @@ public class GameFragment extends Fragment implements MenuProvider {
     // Load and bind layout.
     binding = FragmentGameBinding.inflate(inflater, container, false);
     binding.submit.setOnClickListener((v) -> submitGuess());
+    binding.goToScores.setOnClickListener((v) -> {
+      NavController controller = Navigation.findNavController(binding.getRoot());
+      controller.navigate(GameFragmentDirections.navigateToScores());
+    });
     // TODO: 2/7/2024 Initialize view widgets as necessary
     return binding.getRoot();
   }
@@ -77,6 +84,9 @@ public class GameFragment extends Fragment implements MenuProvider {
     if (menuItem.getItemId() == R.id.new_game) {
       adapter = null;
       viewModel.startGame();
+    } else if (menuItem.getItemId() == R.id.settings) {
+      NavController controller = Navigation.findNavController(binding.getRoot());
+      controller.navigate(GameFragmentDirections.navigateToSettings());
     } else {
       handled = false;
     }
