@@ -5,6 +5,7 @@ import android.util.Log;
 import edu.cnm.deepdive.codebreaker.model.Game;
 import edu.cnm.deepdive.codebreaker.model.Guess;
 import edu.cnm.deepdive.codebreaker.model.entity.GameResult;
+import edu.cnm.deepdive.codebreaker.model.entity.User;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -43,21 +44,17 @@ public class CodebreakerRepository {
   public Single<Guess> submitGuess(String text) {
     return Single.fromSupplier(() -> game.validate(text))
         .flatMap((guess) -> proxy.submitGuess(game.getId(), guess))
-        .doOnSuccess(guess -> game.getGuesses().add(guess))
-        .doOnSuccess((guess) -> {
-          if (game.isSolved()) {
-            GameResult result = toResult(game);
-            //noinspection ResultOfMethodCallIgnored
-            resultRepository
-                .add(result)
-                .subscribe(
-                    (r) -> {},
-                    (throwable) ->
-                        Log.e(TAG, throwable.getMessage(), throwable)
-                );
-          }
+        .flatMap((guess) -> {
+          game.getGuesses().add(guess);
+          return game.isSolved()
+              ? userRepository
+                  .getCurrentUser()
+                  .map((user) -> toResult(game, user))
+                  .flatMap(resultRepository::add)
+                  .map((result) -> guess)
+              : Single.just(guess);
         })
-        .subscribeOn(scheduler);
+                .subscribeOn(scheduler);
 
   }
 
@@ -76,8 +73,9 @@ public class CodebreakerRepository {
     this.game = game;
   }
 
-  private GameResult toResult(Game game) {
+  private GameResult toResult(Game game, User user) {
     GameResult result = new GameResult();
+    result.setUserId(user.getId());
     result.setCodeLength(game.getLength());
     List<Guess> guesses = game.getGuesses();
     int size = guesses.size();
