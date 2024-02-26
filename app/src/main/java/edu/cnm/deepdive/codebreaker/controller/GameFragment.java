@@ -139,16 +139,19 @@ public class GameFragment extends Fragment implements MenuProvider {
   private void observeGame(LifecycleOwner owner) {
     viewModel
         .getGame()
-        .observe(owner, (game) -> {
-          List<Guess> guesses = game.getGuesses();
-          if (adapter == null) {
-            adapter = new GuessesAdapter(requireContext(), colorNameLookup, colorValueLookup);
-            binding.guesses.setAdapter(adapter);
-            createSpinners(game);
-          }
-          adapter.notifyDataSetChanged();
-          binding.guesses.post(() -> binding.guesses.smoothScrollToPosition(guesses.size() - 1));
-        });
+        .observe(owner, this::handleGame);
+  }
+
+  private void handleGame(Game game) {
+    List<Guess> guesses = game.getGuesses();
+    if (adapter == null) {
+      adapter = new GuessesAdapter(requireContext(), guesses, colorNameLookup, colorValueLookup);
+      binding.guesses.setAdapter(adapter);
+      createSpinners(game);
+    }
+    adapter.notifyDataSetChanged();
+    binding.guesses.post(() -> binding.guesses.smoothScrollToPosition(guesses.size() - 1));
+    codeLength = game.getLength();
   }
 
   private void observeInProgress(LifecycleOwner owner) {
