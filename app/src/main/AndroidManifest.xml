@@ -17,6 +17,7 @@
     <activity
       android:exported="false"
       android:name=".controller.MainActivity"/>
+
     <activity
       android:exported="true"
       android:name=".controller.LoginActivity">
@@ -27,6 +28,5 @@
       </intent-filter>
     </activity>
   </application>
-
 
 </manifest>

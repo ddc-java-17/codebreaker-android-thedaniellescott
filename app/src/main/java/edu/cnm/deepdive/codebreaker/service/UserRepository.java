@@ -6,7 +6,6 @@ import edu.cnm.deepdive.codebreaker.model.dao.UserDao;
 import edu.cnm.deepdive.codebreaker.model.entity.User;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -17,8 +16,9 @@ public class UserRepository {
   private final GoogleSignInService signInService;
 
   @Inject
-  UserRepository(UserDao userDao) {
+  UserRepository(UserDao userDao, GoogleSignInService signInService) {
     this.userDao = userDao;
+    this.signInService = signInService;
   }
 
   public Single<User> getCurrentUser() {

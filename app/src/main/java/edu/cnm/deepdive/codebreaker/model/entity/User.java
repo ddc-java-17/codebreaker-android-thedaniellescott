@@ -19,7 +19,7 @@ public class User {
   @ColumnInfo(name = "user_id")
   private long id;
 
-  @ColumnInfo(name = "oath_key")
+  @ColumnInfo(name = "oauth_key")
   private String oauthKey;
 
   @ColumnInfo(name = "display_name", collate = ColumnInfo.NOCASE)

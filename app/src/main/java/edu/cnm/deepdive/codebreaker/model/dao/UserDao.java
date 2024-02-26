@@ -18,7 +18,7 @@ public interface UserDao {
   @Query("SELECT * FROM user WHERE user_id = :userId")
   LiveData<User> select(long userId);
 
-  @Query("SELECT * FROM user WHERE oath_key = :oathKey")
+  @Query("SELECT * FROM user WHERE oauth_key = :oathKey")
   Maybe<User> select(String oathKey);
 
 }
