@@ -19,6 +19,7 @@ public class CodebreakerRepository {
 
   private final CodebreakerServiceProxy proxy;
   private final GameResultRepository resultRepository;
+  private final UserRepository userRepository;
   private final Scheduler scheduler;
   private Game game;
 
@@ -26,6 +27,7 @@ public class CodebreakerRepository {
   CodebreakerRepository(CodebreakerServiceProxy proxy, GameResultRepository resultRepository) {
     this.proxy = proxy;
     this.resultRepository = resultRepository;
+    this.userRepository = userRepository;
     scheduler = Schedulers.single();
   }
 
