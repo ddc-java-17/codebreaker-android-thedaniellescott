@@ -25,27 +25,12 @@ public class GuessesAdapter extends ArrayAdapter<Guess> {
   private final Map<Integer, Integer> colorValueLookup;
 
 
-  public GuessesAdapter(@NonNull Context context, @NonNull List<Guess> guesses) {
+  public GuessesAdapter(@NonNull Context context, @NonNull List<Guess> guesses,
+      Map<Integer, String> colorNameLookup, Map<Integer, Integer> colorValueLookup) {
     super(context, R.layout.item_guesses, guesses);
     inflater = LayoutInflater.from(context);
-    Resources res = context.getResources();
-    int[] colorValues = res.getIntArray(R.array.color_values);
-    String[] colorNames = res.getStringArray(R.array.color_names);
-    colorNameLookup = Stream.of(colorNames)
-        .collect(
-            Collectors.toMap(
-                (name) -> name.codePointAt(0),
-                (name) -> name
-            )
-        );
-    colorValueLookup = IntStream.range(0, colorNames.length)
-        .boxed()
-        .collect(
-            Collectors.toMap(
-                (pos) -> colorNames[pos].codePointAt(0),
-                (pos) -> colorValues[pos]
-            )
-        );
+    this.colorNameLookup = colorNameLookup;
+    this.colorValueLookup = colorValueLookup;
   }
 
   @NonNull

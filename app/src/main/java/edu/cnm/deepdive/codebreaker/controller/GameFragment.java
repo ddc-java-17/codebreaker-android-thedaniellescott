@@ -2,6 +2,7 @@ package edu.cnm.deepdive.codebreaker.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,8 +29,11 @@ import edu.cnm.deepdive.codebreaker.model.Game;
 import edu.cnm.deepdive.codebreaker.model.Guess;
 import edu.cnm.deepdive.codebreaker.viewmodel.CodebreakerViewModel;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @AndroidEntryPoint
 public class GameFragment extends Fragment implements MenuProvider {
@@ -37,11 +41,36 @@ public class GameFragment extends Fragment implements MenuProvider {
   private FragmentGameBinding binding;
   private CodebreakerViewModel viewModel;
   private GuessesAdapter adapter;
+  private Map<Integer, String> colorNameLookup;
+  private Map<Integer, Integer> colorValueLookup;
+  private Map<Integer, Integer> colorPositionLookup;
+  private int codeLength;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    //This is where we read arguments passed to the fragment.
+    setupColors();
+  }
+
+  private void setupColors() {
+    Resources res = requireContext().getResources();
+    int[] colorValues = res.getIntArray(R.array.color_values);
+    String[] colorNames = res.getStringArray(R.array.color_names);
+    colorNameLookup = Stream.of(colorNames)
+        .collect(Collectors.toMap(
+                (name) -> name.codePointAt(0),
+                Function.identity()
+            )
+        );
+    colorValueLookup = IntStream.range(0, colorNames.length)
+        .boxed().collect(Collectors.toMap(
+                (pos) -> colorNames[pos].codePointAt(0),
+                (pos) -> colorValues[pos]
+            )
+        );
+    colorPositionLookup = IntStream.range(0, colorNames.length)
+        .boxed()
+        .collect(Collectors.toMap((pos) -> colorNames[pos].codePointAt(0), (pos) -> pos));
   }
 
   @Override
@@ -52,7 +81,7 @@ public class GameFragment extends Fragment implements MenuProvider {
     binding.submit.setOnClickListener((v) -> submitGuess());
     binding.goToScores.setOnClickListener((v) -> {
       NavController controller = Navigation.findNavController(binding.getRoot());
-      controller.navigate(GameFragmentDirections.navigateToScores());
+      controller.navigate(GameFragmentDirections.navigateToScores(codeLength));
     });
     // TODO: 2/7/2024 Initialize view widgets as necessary
     return binding.getRoot();
@@ -82,10 +111,11 @@ public class GameFragment extends Fragment implements MenuProvider {
   @Override
   public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
     boolean handled = true;
-    if (menuItem.getItemId() == R.id.new_game) {
+    int itemId = menuItem.getItemId();
+    if (itemId == R.id.new_game) {
       adapter = null;
       viewModel.startGame();
-    } else if (menuItem.getItemId() == R.id.settings) {
+    } else if (itemId == R.id.settings) {
       NavController controller = Navigation.findNavController(binding.getRoot());
       controller.navigate(GameFragmentDirections.navigateToSettings());
     } else {
@@ -112,7 +142,7 @@ public class GameFragment extends Fragment implements MenuProvider {
         .observe(owner, (game) -> {
           List<Guess> guesses = game.getGuesses();
           if (adapter == null) {
-            adapter = new GuessesAdapter(requireContext(), guesses);
+            adapter = new GuessesAdapter(requireContext(), colorNameLookup, colorValueLookup);
             binding.guesses.setAdapter(adapter);
             createSpinners(game);
           }
