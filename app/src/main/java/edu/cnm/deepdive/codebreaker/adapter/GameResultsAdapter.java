@@ -78,6 +78,7 @@ public class GameResultsAdapter extends Adapter<ViewHolder> {
     public void bind(int position, GameResult gameResult) {
       binding.getRoot()
           .setBackgroundColor((position % 2 == 0) ? evenRowBackground :oddRowBackground);
+      binding.rank.setText(String.valueOf(position + 1));
       binding.guessCount.setText(String.valueOf(gameResult.getGuessCount()));
       binding.timestamp
           .setText(dateFormatter.format(new Date(gameResult.getTimestamp().toEpochMilli())));

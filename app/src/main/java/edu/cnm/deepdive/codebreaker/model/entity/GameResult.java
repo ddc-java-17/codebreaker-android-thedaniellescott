@@ -12,15 +12,11 @@ import java.time.Instant;
 @Entity(
     tableName = "game_result",
     indices = @Index(value = {"guess_count", "duration"}),
-    foreignKeys = {
-        @ForeignKey(
-            entity = User.class,
-            parentColumns = "user_id",
-            childColumns = "user_id",
-            onDelete = ForeignKey.CASCADE
-        )
-    }
+    foreignKeys = @ForeignKey(entity = User.class, parentColumns = "user_id",
+        childColumns = "user_id", onDelete = ForeignKey.CASCADE
+    )
 )
+
 public class GameResult {
 
   @PrimaryKey(autoGenerate = true)
