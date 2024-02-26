@@ -3,10 +3,12 @@ package edu.cnm.deepdive.codebreaker.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+import com.google.android.material.color.MaterialColors;
 import edu.cnm.deepdive.codebreaker.R;
 import edu.cnm.deepdive.codebreaker.databinding.ItemGameResultsBinding;
 import edu.cnm.deepdive.codebreaker.model.entity.GameResult;
@@ -21,13 +23,16 @@ public class GameResultsAdapter extends Adapter<ViewHolder> {
   private final DateFormat dateFormatter;
   private final String durationFormat;
   private final List<GameResult> gameResults;
+  @ColorInt private final int evenRowBackground;
+  @ColorInt private final int oddRowBackground;
 
   public GameResultsAdapter(Context context, List<GameResult> gameResults) {
     this.gameResults = gameResults;
     inflater = LayoutInflater.from(context);
     dateFormatter = android.text.format.DateFormat.getDateFormat(context);
     durationFormat = context.getString(R.string.duration_format);
-
+    evenRowBackground = MaterialColors.getColor(context, R.attr.evenRowBackground, 0);
+    oddRowBackground = MaterialColors.getColor(context, R.attr.oddRowBackground, 0);
   }
 
   @NonNull
@@ -51,12 +56,12 @@ public class GameResultsAdapter extends Adapter<ViewHolder> {
 
     private static final int MINUTES_PER_HOUR = 60;
     private static final int SECONDS_PER_MINUTE = 60;
-    private static final int MS_PER_SECOND = 1000;
+    private static final double MS_PER_SECOND = 1000d;
     private final ItemGameResultsBinding binding;
     private final DateFormat dateFormatter;
     private final String durationFormat;
 
-    Holder(ItemGameResultsBinding binding, DateFormat dateFormatter, String durationFormat) {
+    private Holder(ItemGameResultsBinding binding, DateFormat dateFormatter, String durationFormat) {
       super(binding.getRoot());
       this.binding = binding;
       this.dateFormatter = dateFormatter;
@@ -71,10 +76,8 @@ public class GameResultsAdapter extends Adapter<ViewHolder> {
       long hours = duration.toHours();
       long minutes = duration.toMinutes() % MINUTES_PER_HOUR;
       long milliseconds = duration.toMillis();
-      long seconds = (milliseconds / MS_PER_SECOND) % SECONDS_PER_MINUTE;
-      milliseconds %= MS_PER_SECOND;
-      binding.duration
-          .setText(String.format(durationFormat, hours, minutes, seconds, milliseconds));
+      double seconds = (milliseconds / MS_PER_SECOND) % SECONDS_PER_MINUTE;
+      binding.duration.setText(String.format(durationFormat, hours, minutes, seconds));
     }
 
   }

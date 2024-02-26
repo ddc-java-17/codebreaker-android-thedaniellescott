@@ -173,7 +173,6 @@ public class GameFragment extends Fragment implements MenuProvider {
             .codePoints()
             .map(colorPositionLookup::get)
             .toArray();
-    // TODO: 2/20/2024 Use lastGuess to reset spinners to colors of lastGuess.
     Context context = requireContext();
     binding.colorSelectors.removeAllViews();
       LayoutInflater layoutInflater = getLayoutInflater();
