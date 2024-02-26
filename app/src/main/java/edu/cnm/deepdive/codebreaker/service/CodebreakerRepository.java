@@ -24,7 +24,8 @@ public class CodebreakerRepository {
   private Game game;
 
   @Inject
-  CodebreakerRepository(CodebreakerServiceProxy proxy, GameResultRepository resultRepository) {
+  CodebreakerRepository(CodebreakerServiceProxy proxy, GameResultRepository resultRepository,
+      UserRepository userRepository) {
     this.proxy = proxy;
     this.resultRepository = resultRepository;
     this.userRepository = userRepository;

@@ -32,13 +32,14 @@ public class UserRepository {
                 })
                 .flatMap((user) ->
                     userDao
-                        .insert(user))
+                        .insert(user)
                         .map((id) -> {
                           user.setId(id);
                           return user;
                         })
-        )
-        .subscribeOn(Schedulers.io());
+                )
+                .subscribeOn(Schedulers.io())
+        );
   }
 
   public LiveData<User> get(long userId) {
