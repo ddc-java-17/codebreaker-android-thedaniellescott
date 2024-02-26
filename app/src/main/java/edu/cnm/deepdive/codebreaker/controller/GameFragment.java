@@ -165,17 +165,25 @@ public class GameFragment extends Fragment implements MenuProvider {
   private void createSpinners(Game game) {
     int codeLength = game.getLength();
     List<Guess> guesses = game.getGuesses();
-    String lastGuess = (guesses.isEmpty()) ? null : guesses.get(guesses.size() - 1).getContent();
+    int[] selectedItems = guesses.isEmpty()
+        ? new int[codeLength]
+        : guesses
+            .get(guesses.size() - 1)
+            .getContent()
+            .codePoints()
+            .map(colorPositionLookup::get)
+            .toArray();
     // TODO: 2/20/2024 Use lastGuess to reset spinners to colors of lastGuess.
     Context context = requireContext();
     binding.colorSelectors.removeAllViews();
+      LayoutInflater layoutInflater = getLayoutInflater();
     for (int i = 0; i < codeLength; i++) {
-      Spinner spinner = (Spinner) getLayoutInflater()
+      Spinner spinner = (Spinner) layoutInflater
           .inflate(R.layout.color_spinner, binding.colorSelectors, false);
       spinner.setAdapter(new SwatchesAdapter(context));
+      spinner.setSelection(selectedItems[i]);
       binding.colorSelectors.addView(spinner);
     }
-
   }
 
   private void submitGuess() {
