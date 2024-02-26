@@ -178,7 +178,7 @@ public class GameFragment extends Fragment implements MenuProvider {
             .toArray();
     Context context = requireContext();
     binding.colorSelectors.removeAllViews();
-      LayoutInflater layoutInflater = getLayoutInflater();
+    LayoutInflater layoutInflater = getLayoutInflater();
     for (int i = 0; i < codeLength; i++) {
       Spinner spinner = (Spinner) layoutInflater
           .inflate(R.layout.color_spinner, binding.colorSelectors, false);

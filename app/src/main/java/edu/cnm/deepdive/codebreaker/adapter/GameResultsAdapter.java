@@ -23,8 +23,10 @@ public class GameResultsAdapter extends Adapter<ViewHolder> {
   private final DateFormat dateFormatter;
   private final String durationFormat;
   private final List<GameResult> gameResults;
-  @ColorInt private final int evenRowBackground;
-  @ColorInt private final int oddRowBackground;
+  @ColorInt
+  private final int evenRowBackground;
+  @ColorInt
+  private final int oddRowBackground;
 
   public GameResultsAdapter(Context context, List<GameResult> gameResults) {
     this.gameResults = gameResults;
@@ -61,7 +63,8 @@ public class GameResultsAdapter extends Adapter<ViewHolder> {
     private final DateFormat dateFormatter;
     private final String durationFormat;
 
-    private Holder(ItemGameResultsBinding binding, DateFormat dateFormatter, String durationFormat) {
+    private Holder(ItemGameResultsBinding binding, DateFormat dateFormatter,
+        String durationFormat) {
       super(binding.getRoot());
       this.binding = binding;
       this.dateFormatter = dateFormatter;
