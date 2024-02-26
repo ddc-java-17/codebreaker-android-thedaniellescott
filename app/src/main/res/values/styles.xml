@@ -21,6 +21,8 @@
     <item name="colorPrimary">@color/primary_color</item>
     <item name="colorPrimaryDark">@color/primary_color_dark</item>
     <item name="colorAccent">@color/accent_color</item>
+    <item name="evenRowBackground">@color/even_row_background</item>
+    <item name="oddRowBackground">@color/odd_row_background</item>
   </style>
 
   <style name="AppTheme.GuessText">
@@ -39,4 +41,12 @@
     <item name="android:fontWeight">900</item>
   </style>
 
+  <style name="ScoreColumn">
+    <item name="android:textSize">16sp</item>
+    <item name="android:textAlignment">center</item>
+  </style>
+
+  <style name="ScoreColumn.Header">
+    <item name="android:textFontWeight">900</item>
+  </style>
 </resources>
