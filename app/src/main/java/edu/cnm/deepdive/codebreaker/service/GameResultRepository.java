@@ -3,6 +3,7 @@ package edu.cnm.deepdive.codebreaker.service;
 import androidx.lifecycle.LiveData;
 import edu.cnm.deepdive.codebreaker.model.dao.GameResultDao;
 import edu.cnm.deepdive.codebreaker.model.entity.GameResult;
+import edu.cnm.deepdive.codebreaker.model.entity.User;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -24,8 +25,10 @@ public class GameResultRepository {
         .subscribeOn(Schedulers.io());
   }
 
-  public LiveData<List<GameResult>> getAll(int codeLength) {
-    return gameResultDao.getRankedResults(codeLength);
+  public LiveData<List<GameResult>> getAll(int codeLength, User user) {
+    return (user != null)
+        ? gameResultDao.getRankedResults(codeLength, user.getId())
+        : gameResultDao.getRankedResults(codeLength);
   }
 
   public Completable clear() {

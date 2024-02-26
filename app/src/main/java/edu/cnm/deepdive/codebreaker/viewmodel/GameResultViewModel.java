@@ -10,7 +10,9 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import edu.cnm.deepdive.codebreaker.model.entity.GameResult;
+import edu.cnm.deepdive.codebreaker.model.entity.User;
 import edu.cnm.deepdive.codebreaker.service.GameResultRepository;
+import edu.cnm.deepdive.codebreaker.service.UserRepository;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import java.util.List;
 import javax.inject.Inject;
@@ -20,19 +22,24 @@ public class GameResultViewModel extends ViewModel implements DefaultLifecycleOb
 
   private static final String TAG = GameResultViewModel.class.getSimpleName();
 
-  private final GameResultRepository repository;
+  private final GameResultRepository resultRepository;
+  private final UserRepository userRepository;
   private final MutableLiveData<Integer> codeLength;
   private final LiveData<List<GameResult>> gameResults;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
+  private User currentUser;
 
   @Inject
-  public GameResultViewModel(GameResultRepository repository) {
-    this.repository = repository;
+  public GameResultViewModel(GameResultRepository resultRepository, UserRepository userRepository) {
+    this.resultRepository = resultRepository;
+    this.userRepository = userRepository;
     codeLength = new MutableLiveData<>();
-    gameResults = Transformations.switchMap(codeLength, repository::getAll);
+    gameResults = Transformations.switchMap(codeLength,
+        codeLength -> resultRepository.getAll(codeLength, currentUser));
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
+    loadCurrentUser();
   }
 
   public LiveData<Integer> getCodeLength() {
@@ -52,7 +59,7 @@ public class GameResultViewModel extends ViewModel implements DefaultLifecycleOb
   }
 
   public void clearResults() {
-    repository
+    resultRepository
         .clear()
         .subscribe(
             () -> {
@@ -66,6 +73,17 @@ public class GameResultViewModel extends ViewModel implements DefaultLifecycleOb
   public void onStop(@NonNull LifecycleOwner owner) {
     pending.clear();
     DefaultLifecycleObserver.super.onStop(owner);
+  }
+
+  private void loadCurrentUser() {
+    throwable.postValue(null);
+    userRepository
+        .getCurrentUser()
+        .subscribe(
+            (user) -> this.currentUser = user,
+            this::postThrowable,
+            pending
+        );
   }
 
   private void postThrowable(Throwable throwable) {
