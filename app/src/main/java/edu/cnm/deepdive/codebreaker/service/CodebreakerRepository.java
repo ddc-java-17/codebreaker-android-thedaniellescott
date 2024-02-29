@@ -21,23 +21,26 @@ public class CodebreakerRepository {
   private final CodebreakerServiceProxy proxy;
   private final GameResultRepository resultRepository;
   private final UserRepository userRepository;
+  private final GoogleSignInService signInService;
   private final Scheduler scheduler;
   private Game game;
 
   @Inject
   CodebreakerRepository(CodebreakerServiceProxy proxy, GameResultRepository resultRepository,
-      UserRepository userRepository) {
+      UserRepository userRepository, GoogleSignInService signInService) {
     this.proxy = proxy;
     this.resultRepository = resultRepository;
     this.userRepository = userRepository;
+    this.signInService = signInService;
     scheduler = Schedulers.single();
   }
 
   public Single<Game> startGame(Game game) {
-    return proxy
-        .startGame(game)
-        .doOnSuccess((g) -> this.game = g)
-        .subscribeOn(scheduler);
+    return signInService
+        .refreshBearerToken()
+        .observeOn(scheduler)
+        .flatMap((token) -> proxy.startGame(game, token))
+        .doOnSuccess(this::setGame);
   }
 
   @SuppressLint("CheckResult")
@@ -48,13 +51,13 @@ public class CodebreakerRepository {
           game.getGuesses().add(guess);
           return game.isSolved()
               ? userRepository
-                  .getCurrentUser()
-                  .map((user) -> toResult(game, user))
-                  .flatMap(resultRepository::add)
-                  .map((result) -> guess)
+              .getCurrentUser()
+              .map((user) -> toResult(game, user))
+              .flatMap(resultRepository::add)
+              .map((result) -> guess)
               : Single.just(guess);
         })
-                .subscribeOn(scheduler);
+        .subscribeOn(scheduler);
 
   }
 

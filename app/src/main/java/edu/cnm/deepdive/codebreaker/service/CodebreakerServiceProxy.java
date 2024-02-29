@@ -14,13 +14,14 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface CodebreakerServiceProxy {
 
   @POST("games")
-  Single<Game> startGame(@Body Game game);
+  Single<Game> startGame(@Body Game game, @Header("Authorization") String bearerToken);
 
   @GET("games/{id}")
   Single<Game> getGame(@Path("id") String id);
