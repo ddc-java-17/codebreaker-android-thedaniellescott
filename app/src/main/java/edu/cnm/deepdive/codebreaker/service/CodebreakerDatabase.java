@@ -12,13 +12,14 @@ import edu.cnm.deepdive.codebreaker.model.dao.GameResultDao;
 import edu.cnm.deepdive.codebreaker.model.dao.UserDao;
 import edu.cnm.deepdive.codebreaker.model.entity.Game;
 import edu.cnm.deepdive.codebreaker.model.entity.GameResult;
+import edu.cnm.deepdive.codebreaker.model.entity.Guess;
 import edu.cnm.deepdive.codebreaker.model.entity.User;
 import edu.cnm.deepdive.codebreaker.service.CodebreakerDatabase.Converters;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
 
-@Database(entities = {GameResult.class, User.class, Game.class}, version = 1)
+@Database(entities = {GameResult.class, User.class, Game.class, Guess.class}, version = 1)
 @TypeConverters({Converters.class})
 public abstract class CodebreakerDatabase extends RoomDatabase {
 

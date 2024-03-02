@@ -2,13 +2,26 @@ package edu.cnm.deepdive.codebreaker.model.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 
 @Entity(
-    tableName = "guess"
+    tableName = "guess",
+    indices = {
+        @Index(value = "key", unique = true),
+        @Index(value = {"game_id", "timestamp"})
+    },
+    foreignKeys = @ForeignKey(
+        entity = Game.class,
+        childColumns = "game_id",
+        parentColumns = "game_id",
+        onDelete = ForeignKey.CASCADE
+    )
 )
 public class Guess {
 
@@ -18,25 +31,31 @@ public class Guess {
 
   @Expose(serialize = false, deserialize = true)
   @SerializedName("id")
-  private final String key;
+  private String key;
 
   @SerializedName("text")
   @Expose
-  private final String content;
+  private String content;
 
   @SerializedName("exactMatches")
   @Expose(serialize = false, deserialize = true)
-  private final int correct;
+  private int correct;
 
   @SerializedName("nearMatches")
   @Expose
-  private final int close;
+  private int close;
 
   @SerializedName("created")
   @Expose(serialize = false, deserialize = true)
-  private final Date timestamp;
+  private Date timestamp;
 
+  @ColumnInfo(name = "game_id", index = true)
   private long gameId;
+
+  @Ignore
+  public Guess() {
+    // provided for use by Room.
+  }
 
   Guess (String content) {
     this.content = content;
@@ -46,23 +65,59 @@ public class Guess {
     timestamp = null;
   }
 
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
   public String getKey() {
     return key;
+  }
+
+  public void setKey(String key) {
+    this.key = key;
   }
 
   public String getContent() {
     return content;
   }
 
+  public void setContent(String content) {
+    this.content = content;
+  }
+
   public int getCorrect() {
     return correct;
+  }
+
+  public void setCorrect(int correct) {
+    this.correct = correct;
   }
 
   public int getClose() {
     return close;
   }
 
+  public void setClose(int close) {
+    this.close = close;
+  }
+
   public Date getTimestamp() {
     return timestamp;
+  }
+
+  public void setTimestamp(Date timestamp) {
+    this.timestamp = timestamp;
+  }
+
+  public long getGameId() {
+    return gameId;
+  }
+
+  public void setGameId(long gameId) {
+    this.gameId = gameId;
   }
 }

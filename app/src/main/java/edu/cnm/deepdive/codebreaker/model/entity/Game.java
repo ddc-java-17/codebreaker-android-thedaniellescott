@@ -31,7 +31,7 @@ public class Game {
 
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "game_id")
-  private int id;
+  private long id;
 
   @Expose(serialize = false, deserialize = true)
   @SerializedName("id")
@@ -90,11 +90,11 @@ public class Game {
     return new Guess(content);
   }
 
-  public int getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(long id) {
     this.id = id;
   }
 
