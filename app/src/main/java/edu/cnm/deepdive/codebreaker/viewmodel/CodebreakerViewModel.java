@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import edu.cnm.deepdive.codebreaker.R;
-import edu.cnm.deepdive.codebreaker.model.Game;
+import edu.cnm.deepdive.codebreaker.model.entity.Game;
 import edu.cnm.deepdive.codebreaker.service.CodebreakerRepository;
 import edu.cnm.deepdive.codebreaker.service.PreferencesRepository;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;

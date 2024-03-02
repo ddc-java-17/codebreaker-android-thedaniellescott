@@ -1,7 +1,6 @@
 package edu.cnm.deepdive.codebreaker.controller;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,8 +24,8 @@ import edu.cnm.deepdive.codebreaker.R;
 import edu.cnm.deepdive.codebreaker.adapter.GuessesAdapter;
 import edu.cnm.deepdive.codebreaker.adapter.SwatchesAdapter;
 import edu.cnm.deepdive.codebreaker.databinding.FragmentGameBinding;
-import edu.cnm.deepdive.codebreaker.model.Game;
-import edu.cnm.deepdive.codebreaker.model.Guess;
+import edu.cnm.deepdive.codebreaker.model.entity.Game;
+import edu.cnm.deepdive.codebreaker.model.entity.Guess;
 import edu.cnm.deepdive.codebreaker.viewmodel.CodebreakerViewModel;
 import java.util.List;
 import java.util.Map;

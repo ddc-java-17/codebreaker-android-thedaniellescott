@@ -1,9 +1,8 @@
 package edu.cnm.deepdive.codebreaker.service;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
-import edu.cnm.deepdive.codebreaker.model.Game;
-import edu.cnm.deepdive.codebreaker.model.Guess;
+import edu.cnm.deepdive.codebreaker.model.entity.Game;
+import edu.cnm.deepdive.codebreaker.model.entity.Guess;
 import edu.cnm.deepdive.codebreaker.model.entity.GameResult;
 import edu.cnm.deepdive.codebreaker.model.entity.User;
 import io.reactivex.rxjava3.core.Scheduler;
@@ -43,7 +42,7 @@ public class CodebreakerRepository {
   @SuppressLint("CheckResult")
   public Single<Guess> submitGuess(String text) {
     return Single.fromSupplier(() -> game.validate(text))
-        .flatMap((guess) -> proxy.submitGuess(game.getId(), guess))
+        .flatMap((guess) -> proxy.submitGuess(game.getKey(), guess))
         .flatMap((guess) -> {
           game.getGuesses().add(guess);
           return game.isSolved()
