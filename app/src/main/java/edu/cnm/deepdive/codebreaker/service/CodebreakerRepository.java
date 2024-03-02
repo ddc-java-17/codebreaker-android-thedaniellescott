@@ -1,6 +1,8 @@
 package edu.cnm.deepdive.codebreaker.service;
 
-import android.annotation.SuppressLint;
+import androidx.annotation.NonNull;
+import edu.cnm.deepdive.codebreaker.model.dao.GameDao;
+import edu.cnm.deepdive.codebreaker.model.dao.GuessDao;
 import edu.cnm.deepdive.codebreaker.model.entity.Game;
 import edu.cnm.deepdive.codebreaker.model.entity.Guess;
 import edu.cnm.deepdive.codebreaker.model.entity.GameResult;
@@ -20,15 +22,19 @@ public class CodebreakerRepository {
   private final CodebreakerServiceProxy proxy;
   private final GameResultRepository resultRepository;
   private final UserRepository userRepository;
+  private final GameDao gameDao;
+  private final GuessDao guessDao;
   private final Scheduler scheduler;
   private Game game;
 
   @Inject
   CodebreakerRepository(CodebreakerServiceProxy proxy, GameResultRepository resultRepository,
-      UserRepository userRepository) {
+      UserRepository userRepository, GameDao gameDao, GuessDao guessDao) {
     this.proxy = proxy;
     this.resultRepository = resultRepository;
     this.userRepository = userRepository;
+    this.gameDao = gameDao;
+    this.guessDao = guessDao;
     scheduler = Schedulers.single();
   }
 
@@ -39,22 +45,30 @@ public class CodebreakerRepository {
         .subscribeOn(scheduler);
   }
 
-  @SuppressLint("CheckResult")
   public Single<Guess> submitGuess(String text) {
     return Single.fromSupplier(() -> game.validate(text))
         .flatMap((guess) -> proxy.submitGuess(game.getKey(), guess))
         .flatMap((guess) -> {
           game.getGuesses().add(guess);
           return game.isSolved()
-              ? userRepository
-                  .getCurrentUser()
-                  .map((user) -> toResult(game, user))
-                  .flatMap(resultRepository::add)
-                  .map((result) -> guess)
+              ? persist(guess)
               : Single.just(guess);
         })
-                .subscribeOn(scheduler);
+        .subscribeOn(scheduler);
 
+  }
+
+  @NonNull
+  private Single<Guess> persist(Guess guess) {
+    return userRepository
+        .getCurrentUser()
+        .map((user) -> {
+          game.setUserId(user.getId());
+          return game;
+        })
+        .flatMap(gameDao::insertAndUpdate)
+        .flatMapCompletable(guessDao::insertAndUpdate)
+        .andThen(Single.just(guess));
   }
 
   public Single<Game> getGame(String id) {

@@ -8,7 +8,9 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
+import edu.cnm.deepdive.codebreaker.model.dao.GameDao;
 import edu.cnm.deepdive.codebreaker.model.dao.GameResultDao;
+import edu.cnm.deepdive.codebreaker.model.dao.GuessDao;
 import edu.cnm.deepdive.codebreaker.model.dao.UserDao;
 import edu.cnm.deepdive.codebreaker.model.entity.Game;
 import edu.cnm.deepdive.codebreaker.model.entity.GameResult;
@@ -23,15 +25,23 @@ import java.util.Date;
 @TypeConverters({Converters.class})
 public abstract class CodebreakerDatabase extends RoomDatabase {
 
-  public static final String NAME = "codebreaker_results";
+  private static final String NAME = "codebreaker_results";
 
   CodebreakerDatabase() {
     // Avoid generation of Javadoc HTML.
   }
 
+  public static String getName(){
+    return NAME;
+  }
+
   public abstract GameResultDao getGameResultDao();
 
   public abstract UserDao getUserDao();
+
+  public abstract GameDao getGameDao();
+
+  public abstract GuessDao getGuessDao();
 
   public static class Converters {
 
