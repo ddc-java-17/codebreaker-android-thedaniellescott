@@ -45,8 +45,10 @@ public class CodebreakerRepository {
 
   @SuppressLint("CheckResult")
   public Single<Guess> submitGuess(String text) {
-    return Single.fromSupplier(() -> game.validate(text))
-        .flatMap((guess) -> proxy.submitGuess(game.getId(), guess))
+    return signInService
+        .refreshBearerToken()
+        .observeOn(scheduler)
+        .flatMap((token) -> proxy.submitGuess(game.getId(), game.validate(text), token))
         .flatMap((guess) -> {
           game.getGuesses().add(guess);
           return game.isSolved()
@@ -56,16 +58,14 @@ public class CodebreakerRepository {
               .flatMap(resultRepository::add)
               .map((result) -> guess)
               : Single.just(guess);
-        })
-        .subscribeOn(scheduler);
+        });
 
   }
 
   public Single<Game> getGame(String id) {
-    return proxy
-        .getGame(id)
-        .doOnSuccess(this::setGame)
-        .subscribeOn(scheduler);
+    return signInService
+        .refreshBearerToken()
+        .flatMap((token) -> proxy.getGame(id, token).doOnSuccess(this::setGame));
   }
 
   public Game getGame() {

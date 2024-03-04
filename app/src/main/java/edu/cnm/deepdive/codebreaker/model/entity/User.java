@@ -11,7 +11,6 @@ import androidx.room.PrimaryKey;
         @Index(value = "oauth_key", unique = true),
         @Index(value = "display_name", unique = true)
     }
-
 )
 public class User {
 
@@ -49,4 +48,5 @@ public class User {
   public void setDisplayName(String displayName) {
     this.displayName = displayName;
   }
+
 }
