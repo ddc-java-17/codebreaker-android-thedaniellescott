@@ -14,11 +14,9 @@ public class Guess {
   @Expose
   private final String content;
 
-  @SerializedName("exactMatches")
   @Expose(serialize = false, deserialize = true)
   private final int correct;
 
-  @SerializedName("nearMatches")
   @Expose
   private final int close;
 
