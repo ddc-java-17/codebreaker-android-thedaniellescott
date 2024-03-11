@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+    android:id="@+id/game_fragment"
+    android:title="@string/game_menu_label"/>
+<!--  TODO: Add icon-->
+
+  <item
+    android:id="@+id/scores_fragment"
+    android:title="@string/scores_fragment_label"
+    android:icon="@drawable/ranked_list"/>
+
+  <item
+    android:id="@+id/ranks_fragment"
+    android:title="@string/ranks_fragment_label"
+    android:icon="@drawable/ranked_list"/>
+
+</menu>

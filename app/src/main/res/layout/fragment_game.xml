@@ -60,7 +60,7 @@
     android:id="@+id/go_to_scores"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@drawable/rank"
+    android:src="@drawable/ranked_list"
     android:contentDescription="@string/go_to_scores_description"
     app:useCompatPadding="true"
     app:layout_constraintEnd_toEndOf="@id/guesses"
