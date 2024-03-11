@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+  <group>
+
   <item
     android:id="@+id/game_fragment"
     android:title="@string/game_menu_label"/>
@@ -15,5 +17,17 @@
     android:id="@+id/ranks_fragment"
     android:title="@string/ranks_fragment_label"
     android:icon="@drawable/ranked_list"/>
+
+  </group>
+
+  <item
+    android:id="@+id/settings"
+    android:title="@string/settings"
+    android:icon="@drawable/settings"/>
+
+  <item
+    android:id="@+id/sign_out"
+    android:title="@string/sign_out"
+    android:icon="@drawable/logout"/>
 
 </menu>

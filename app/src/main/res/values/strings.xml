@@ -6,6 +6,8 @@
   <string name="guess_header">Guess</string>
   <string name="correct_header">Correct</string>
   <string name="close_header">Close</string>
+  <string name="nav_open">Open navigation drawer</string>
+  <string name="nav_close">Close navigation drawer</string>
 
   <string name="guess_hint">Text of guess (ABCDEF)</string>
   <string name="submit_description">Submit guess to service.</string>

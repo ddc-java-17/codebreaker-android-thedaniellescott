@@ -17,7 +17,8 @@
 
     <activity
       android:exported="false"
-      android:name=".controller.MainActivity"/>
+      android:name=".controller.MainActivity"
+      android:theme="@style/AppTheme.NoActionBar"/>
 
     <activity
       android:exported="true"

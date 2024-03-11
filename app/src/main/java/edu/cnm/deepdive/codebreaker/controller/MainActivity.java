@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         .observe(this, this::handleThrowable);
     setContentView(binding.getRoot());
     setupNavigation();
+    setupDrawer();
   }
 
   @Override
@@ -50,23 +55,13 @@ public class MainActivity extends AppCompatActivity {
   }
 
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    super.onCreateOptionsMenu(menu);
-    getMenuInflater().inflate(R.menu.main_options, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-    boolean handled = true;
-    if (item.getItemId() == R.id.sign_out) {
-      loginViewModel.signOut();
-    } else if (item.getItemId() == R.id.settings) {
-      navController.navigate(MainNavigationMapDirections.navigateToSettings());
+  public void onBackPressed() {
+    DrawerLayout drawer = binding.getRoot();
+    if (drawer.isDrawerOpen(GravityCompat.START)) {
+      drawer.closeDrawer(GravityCompat.START);
     } else {
-      handled = super.onOptionsItemSelected(item);
+      super.onBackPressed();
     }
-    return handled;
   }
 
   private void handleAccount(GoogleSignInAccount account) {
@@ -84,13 +79,23 @@ public class MainActivity extends AppCompatActivity {
   private void setupNavigation() {
     AppBarConfiguration config = new AppBarConfiguration.Builder(
         R.id.game_fragment, R.id.scores_fragment, R.id.ranks_fragment)
+        .setFallbackOnNavigateUpListener(this::onSupportNavigateUp)
         .build();
     //noinspection DataFlowIssue
     navController = ((NavHostFragment) getSupportFragmentManager()
         .findFragmentById(R.id.nav_host_fragment))
         .getNavController();
-    NavigationUI.setupActionBarWithNavController(this, navController, config);
-    NavigationUI.setupWithNavController(binding.navigator, navController);
+//    setSupportActionBar(binding.appBarLayout.toolbar);
+//    NavigationUI.setupActionBarWithNavController(this, navController, config);
+    NavigationUI.setupWithNavController(binding.appBarLayout.toolbar, navController, config);
+  }
+
+  private void setupDrawer() {
+    DrawerLayout drawer = binding.getRoot();
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer,
+        binding.appBarLayout.toolbar, R.string.nav_open, R.string.nav_close);
+    drawer.addDrawerListener(toggle);
+    toggle.syncState();
 
   }
 
