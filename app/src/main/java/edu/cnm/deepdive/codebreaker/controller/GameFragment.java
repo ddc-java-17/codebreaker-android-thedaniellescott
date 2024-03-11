@@ -79,10 +79,6 @@ public class GameFragment extends Fragment implements MenuProvider {
     // Load and bind layout.
     binding = FragmentGameBinding.inflate(inflater, container, false);
     binding.submit.setOnClickListener((v) -> submitGuess());
-    binding.goToScores.setOnClickListener((v) -> {
-      NavController controller = Navigation.findNavController(binding.getRoot());
-      controller.navigate(GameFragmentDirections.navigateToScores(codeLength));
-    });
     // TODO: 2/7/2024 Initialize view widgets as necessary
     return binding.getRoot();
   }
@@ -115,9 +111,6 @@ public class GameFragment extends Fragment implements MenuProvider {
     if (itemId == R.id.new_game) {
       adapter = null;
       viewModel.startGame();
-    } else if (itemId == R.id.settings) {
-      NavController controller = Navigation.findNavController(binding.getRoot());
-      controller.navigate(GameFragmentDirections.navigateToSettings());
     } else {
       handled = false;
     }

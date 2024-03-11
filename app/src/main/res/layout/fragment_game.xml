@@ -56,16 +56,6 @@
     app:layout_constraintBottom_toTopOf="@id/color_selectors"
     tools:listitem="@layout/item_guesses"/>
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/go_to_scores"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/ranked_list"
-    android:contentDescription="@string/go_to_scores_description"
-    app:useCompatPadding="true"
-    app:layout_constraintEnd_toEndOf="@id/guesses"
-    app:layout_constraintBottom_toBottomOf="@id/guesses"/>
-
   <LinearLayout
     android:id="@+id/color_selectors"
     android:layout_width="0dp"

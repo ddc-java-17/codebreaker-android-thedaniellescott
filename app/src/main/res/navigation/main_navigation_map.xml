@@ -6,16 +6,20 @@
   app:startDestination="@id/game_fragment">
 
   <action
-    android:id="@+id/navigate_to_game"/>
+    android:id="@+id/navigate_to_game"
+    app:destination="@id/game_fragment"/>
 
   <action
-    android:id="@+id/navigate_to_scores"/>
+    android:id="@+id/navigate_to_scores"
+    app:destination="@id/scores_fragment"/>
 
   <action
-    android:id="@+id/navigate_to_ranks"/>
+    android:id="@+id/navigate_to_ranks"
+    app:destination="@id/ranks_fragment"/>
 
   <action
-    android:id="@+id/navigate_to_settings"/>
+    android:id="@+id/navigate_to_settings"
+    app:destination="@id/settings_fragment"/>
 
   <fragment
     android:id="@+id/game_fragment"
