@@ -2,126 +2,8 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e7efa0b007d05ff426b6184a83dca3ef",
+    "identityHash": "3e4223cda42f8037df5e4b4f25f7682c",
     "entities": [
-      {
-        "tableName": "game_result",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`game_result_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `timestamp` INTEGER NOT NULL, `code_length` INTEGER NOT NULL, `guess_count` INTEGER NOT NULL, `duration` INTEGER NOT NULL, `user_id` INTEGER NOT NULL, FOREIGN KEY(`user_id`) REFERENCES `user`(`user_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "game_result_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "timestamp",
-            "columnName": "timestamp",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "codeLength",
-            "columnName": "code_length",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "guessCount",
-            "columnName": "guess_count",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "duration",
-            "columnName": "duration",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "userId",
-            "columnName": "user_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "autoGenerate": true,
-          "columnNames": [
-            "game_result_id"
-          ]
-        },
-        "indices": [
-          {
-            "name": "index_game_result_guess_count_duration",
-            "unique": false,
-            "columnNames": [
-              "guess_count",
-              "duration"
-            ],
-            "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_result_guess_count_duration` ON `${TABLE_NAME}` (`guess_count`, `duration`)"
-          },
-          {
-            "name": "index_game_result_timestamp",
-            "unique": false,
-            "columnNames": [
-              "timestamp"
-            ],
-            "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_result_timestamp` ON `${TABLE_NAME}` (`timestamp`)"
-          },
-          {
-            "name": "index_game_result_code_length",
-            "unique": false,
-            "columnNames": [
-              "code_length"
-            ],
-            "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_result_code_length` ON `${TABLE_NAME}` (`code_length`)"
-          },
-          {
-            "name": "index_game_result_guess_count",
-            "unique": false,
-            "columnNames": [
-              "guess_count"
-            ],
-            "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_result_guess_count` ON `${TABLE_NAME}` (`guess_count`)"
-          },
-          {
-            "name": "index_game_result_duration",
-            "unique": false,
-            "columnNames": [
-              "duration"
-            ],
-            "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_result_duration` ON `${TABLE_NAME}` (`duration`)"
-          },
-          {
-            "name": "index_game_result_user_id",
-            "unique": false,
-            "columnNames": [
-              "user_id"
-            ],
-            "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_result_user_id` ON `${TABLE_NAME}` (`user_id`)"
-          }
-        ],
-        "foreignKeys": [
-          {
-            "table": "user",
-            "onDelete": "CASCADE",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "user_id"
-            ],
-            "referencedColumns": [
-              "user_id"
-            ]
-          }
-        ]
-      },
       {
         "tableName": "user",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`user_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `oauth_key` TEXT, `display_name` TEXT COLLATE NOCASE)",
@@ -361,10 +243,15 @@
         ]
       }
     ],
-    "views": [],
+    "views": [
+      {
+        "viewName": "game_result",
+        "createSql": "CREATE VIEW `${VIEW_NAME}` AS SELECT\n    gm.game_id AS game_result_id,\n    gm.user_id,\n    gm.length AS code_length,\n    COUNT(*) as guess_count,\n    MAX(gs.timestamp) - MIN(gs.timestamp) AS duration,\n    MAX(gs.timestamp) AS timestamp\n FROM\n   game AS gm\n   JOIN guess AS gs\n      ON gs.game_id = gm.game_id\n  GROUP BY\n    gm.game_id"
+      }
+    ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e7efa0b007d05ff426b6184a83dca3ef')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3e4223cda42f8037df5e4b4f25f7682c')"
     ]
   }
 }

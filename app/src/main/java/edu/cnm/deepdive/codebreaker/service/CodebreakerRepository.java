@@ -20,7 +20,6 @@ public class CodebreakerRepository {
   private static final String TAG = CodebreakerRepository.class.getSimpleName();
 
   private final CodebreakerServiceProxy proxy;
-  private final GameResultRepository resultRepository;
   private final UserRepository userRepository;
   private final GameDao gameDao;
   private final GuessDao guessDao;
@@ -28,10 +27,8 @@ public class CodebreakerRepository {
   private Game game;
 
   @Inject
-  CodebreakerRepository(CodebreakerServiceProxy proxy, GameResultRepository resultRepository,
-      UserRepository userRepository, GameDao gameDao, GuessDao guessDao) {
+  CodebreakerRepository(CodebreakerServiceProxy proxy, UserRepository userRepository, GameDao gameDao, GuessDao guessDao) {
     this.proxy = proxy;
-    this.resultRepository = resultRepository;
     this.userRepository = userRepository;
     this.gameDao = gameDao;
     this.guessDao = guessDao;

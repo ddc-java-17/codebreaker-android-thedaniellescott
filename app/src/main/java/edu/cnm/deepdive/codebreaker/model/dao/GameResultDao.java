@@ -23,24 +23,10 @@ public interface GameResultDao {
       + "ORDER BY guess_count ASC, duration ASC";
   String TRUNCATION_QUERY = "DELETE FROM game_result";
 
-  @Insert
-  Single<Long> insert(GameResult gameResult);
-
   @Query(RANKING_QUERY)
   LiveData<List<GameResult>> getRankedResults(int codeLength);
 
   @Query(RANKING_QUERY_FOR_USER)
   LiveData<List<GameResult>> getRankedResults(int codeLength, long userId);
-
-  @Query(TRUNCATION_QUERY)
-  Completable truncateResults();
-
-  default Single<GameResult> insertAndUpdate(GameResult gameResult) {
-    return insert(gameResult)
-        .map((id) -> {
-          gameResult.setId(id);
-          return gameResult;
-        });
-  }
 
 }
