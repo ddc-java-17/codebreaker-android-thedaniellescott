@@ -2,10 +2,13 @@ package edu.cnm.deepdive.codebreaker.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -25,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
   private NavController navController;
   private AppBarConfiguration appBarConfig;
   private DrawerLayout drawer;
-  // TODO: 3/13/2024 Add OnBackPressedCallback.
+  private OnBackCallback onBackPressedCallback;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +82,35 @@ public class MainActivity extends AppCompatActivity {
           loginViewModel.signOut();
           return true;
         });
+    onBackPressedCallback = new OnBackCallback(
+        drawer.isDrawerOpen(GravityCompat.START));
+    getOnBackPressedDispatcher().addCallback(onBackPressedCallback);
+    drawer.addDrawerListener(new DrawerListener());
   }
 
+  private class OnBackCallback extends OnBackPressedCallback {
 
+    public OnBackCallback(boolean enabled) {
+      super(enabled);
+    }
+
+    @Override
+    public void handleOnBackPressed() {
+      drawer.closeDrawer(GravityCompat.START);
+    }
+  }
+
+  private class DrawerListener extends SimpleDrawerListener {
+
+    @Override
+    public void onDrawerOpened(View drawerView) {
+      onBackPressedCallback.setEnabled(true);
+    }
+
+    @Override
+    public void onDrawerClosed(View drawerView) {
+      onBackPressedCallback.setEnabled(false);
+    }
+  }
 
 }
