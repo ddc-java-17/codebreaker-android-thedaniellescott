@@ -9,11 +9,15 @@
   tools:openDrawer="start"
   tools:context=".controller.MainActivity">
 
-  <include
-    android:id="@+id/app_bar_layout"
-    layout="@layout/app_bar"
+  <androidx.fragment.app.FragmentContainerView
+    android:id="@+id/nav_host_fragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"
+    android:name="androidx.navigation.fragment.NavHostFragment"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:defaultNavHost="true"
+    app:navGraph="@navigation/main_navigation_map"
+    tools:context=".controller.MainActivity"/>
 
   <com.google.android.material.navigation.NavigationView
     android:id="@+id/navigator"
@@ -21,19 +25,6 @@
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:fitsSystemWindows="true"
-    app:headerLayout="@layout/nav_header"
     app:menu="@menu/navigation"/>
-
-  <androidx.fragment.app.FragmentContainerView
-    android:id="@+id/nav_host_fragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:name="androidx.navigation.fragment.NavHostFragment"
-    android:paddingTop="?attr/actionBarSize"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    app:defaultNavHost="true"
-    app:navGraph="@navigation/main_navigation_map"
-    tools:context=".controller.MainActivity"
-    tools:showIn="@layout/app_bar"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
