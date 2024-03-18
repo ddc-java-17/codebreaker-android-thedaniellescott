@@ -9,11 +9,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
+import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.codebreaker.databinding.FragmentRanksBinding;
 import edu.cnm.deepdive.codebreaker.viewmodel.CodebreakerViewModel;
 import edu.cnm.deepdive.codebreaker.viewmodel.PreferencesViewModel;
 import edu.cnm.deepdive.codebreaker.viewmodel.RankingsViewModel;
 
+@AndroidEntryPoint
 public class RanksFragment extends Fragment {
 
   private FragmentRanksBinding binding;
