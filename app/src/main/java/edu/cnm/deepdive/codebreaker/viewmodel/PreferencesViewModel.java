@@ -43,6 +43,7 @@ import kotlin.jvm.functions.Function1;
 public class PreferencesViewModel extends ViewModel implements DefaultLifecycleObserver {
 
   private final LiveData<Integer> preferredCodeLength;
+  private final LiveData<Integer> preferredGamesThreshold;
 
   @Inject
   PreferencesViewModel(@ApplicationContext Context context, PreferencesRepository repository) {
@@ -54,10 +55,19 @@ public class PreferencesViewModel extends ViewModel implements DefaultLifecycleO
     LiveData<Integer> rawCodeLength =
         Transformations.map(prefs, (pr) -> pr.getInt(codeLengthKey, codeLengthDefault));
     preferredCodeLength = Transformations.distinctUntilChanged(rawCodeLength);
+
+    String gamesThresholdKey = res.getString(R.string.games_threshold_key);
+    int gamesThresholdDefault = res.getInteger(R.integer.games_threshold_default);
+    LiveData<Integer> rawGamesThreshold =
+        Transformations.map(prefs, (pr) -> pr.getInt(gamesThresholdKey, gamesThresholdDefault));
+    preferredGamesThreshold = Transformations.distinctUntilChanged(rawGamesThreshold);
   }
 
   public LiveData<Integer> getPreferredCodeLength() {
     return preferredCodeLength;
   }
 
+  public LiveData<Integer> getPreferredGamesThreshold() {
+    return preferredGamesThreshold;
+  }
 }

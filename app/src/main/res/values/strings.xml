@@ -31,6 +31,9 @@
   <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="ranks_fragment_label">Ranks</string>
   <string name="game_menu_label">Play</string>
+  <string name="games_threshold_key">games_threshold</string>
+  <string name="games_threshold_title">Threshold of games played for ranking</string>
+  <string name="games_threshold_summary">Minimum number of games a user must player at specified code length to be included in rankings.</string>
 
 
 </resources>

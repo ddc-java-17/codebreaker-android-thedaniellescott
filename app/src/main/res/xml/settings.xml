@@ -12,4 +12,14 @@
     app:showSeekBarValue="true"
     android:icon="@drawable/code_length"/>
 
+<!--  TODO: Add icon.-->
+  <SeekBarPreference
+    android:key="@string/games_threshold_key"
+    android:title="@string/games_threshold_title"
+    android:summary="@string/games_threshold_summary"
+    app:min="@integer/games_threshold_min"
+    android:max="@integer/games_threshold_max"
+    android:defaultValue="@integer/games_threshold_default"
+    app:showSeekBarValue="true"/>
+
 </PreferenceScreen>

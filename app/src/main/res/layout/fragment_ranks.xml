@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:paddingTop="@dimen/half_dynamic_spacing"
   tools:context=".controller.RanksFragment">
 
-  <!-- TODO: Update blank fragment layout -->
-  <TextView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="@string/hello_blank_fragment"/>
+<!--TODO: Add SeekBar and TextView to control codeLength (copy from fragment_scores.xml)-->
 
-</FrameLayout>
+<!--TODO: Add SeekBar and TextView to control gamesThreshold (similar to the above)-->
+
+<!--TODO: Add RecyclerView with LinearLayoutManager and vertical orientation to display List<Ranking>-->
+
+<!--TODO: Create item_rankings resource for individual items along with a RecyclerViewAdapter to holdthose items.-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
