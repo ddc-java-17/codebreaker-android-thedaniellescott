@@ -2,11 +2,13 @@ package edu.cnm.deepdive.codebreaker.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import edu.cnm.deepdive.codebreaker.model.entity.User;
 
+/** @noinspection ConstantValue*/
 public class Ranking {
 
   @Expose
-  private final String userId = null;
+  private final User user = null;
 
   @Expose
   private final int poolSize = 0;
@@ -24,8 +26,8 @@ public class Ranking {
   @Expose
   private final double avgDuration = 0;
 
-  public String getUserId() {
-    return userId;
+  public User getUser() {
+    return user;
   }
 
   public int getPoolSize() {

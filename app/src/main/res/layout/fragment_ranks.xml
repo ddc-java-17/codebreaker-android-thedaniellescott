@@ -4,12 +4,89 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:paddingTop="@dimen/half_dynamic_spacing"
   tools:context=".controller.RanksFragment">
+  
+  <androidx.constraintlayout.widget.Barrier
+    android:id="@+id/label_ending_edge"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:barrierDirection="end"
+    app:constraint_referenced_ids="code_length_label, games_threshold_label"/>
 
-<!--TODO: Add SeekBar and TextView to control codeLength (copy from fragment_scores.xml)-->
+  <TextView
+    android:id="@+id/code_length_label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/half_dynamic_spacing"
+    android:layout_marginStart="@dimen/full_dynamic_spacing"
+    android:layout_marginEnd="@dimen/half_dynamic_spacing"
+    android:text="@string/code_length_label"
+    android:labelFor="@id/code_length"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"/>
 
-<!--TODO: Add SeekBar and TextView to control gamesThreshold (similar to the above)-->
+  <SeekBar
+    android:id="@+id/code_length"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:max="@integer/code_length_max"
+    android:min="@integer/code_length_min"
+    android:layout_margin="@dimen/half_dynamic_spacing"
+    app:layout_constraintStart_toEndOf="@id/label_ending_edge"
+    app:layout_constraintTop_toTopOf="@id/code_length_label"
+    app:layout_constraintBottom_toBottomOf="@id/code_length_label"
+    app:layout_constraintEnd_toStartOf="@id/code_length_value"/>
+
+  <TextView
+    android:id="@+id/code_length_value"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/half_dynamic_spacing"
+    android:layout_marginStart="@dimen/half_dynamic_spacing"
+    android:layout_marginEnd="@dimen/full_dynamic_spacing"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBaseline_toBaselineOf="@id/code_length_label"
+    tools:text="4"/>
+  
+  
+
+  <TextView
+    android:id="@+id/games_threshold_label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/half_dynamic_spacing"
+    android:layout_marginStart="@dimen/full_dynamic_spacing"
+    android:layout_marginEnd="@dimen/half_dynamic_spacing"
+    android:text="@string/games_threshold_label"
+    android:labelFor="@id/games_threshold"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/code_length_label"/>
+
+  <SeekBar
+    android:id="@+id/games_threshold"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:max="@integer/code_length_max"
+    android:min="@integer/code_length_min"
+    android:layout_margin="@dimen/half_dynamic_spacing"
+    app:layout_constraintStart_toEndOf="@id/label_ending_edge"
+    app:layout_constraintTop_toTopOf="@id/games_threshold_label"
+    app:layout_constraintBottom_toBottomOf="@id/games_threshold_label"
+    app:layout_constraintEnd_toStartOf="@id/games_threshold_value"/>
+
+  <TextView
+    android:id="@+id/games_threshold_value"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/half_dynamic_spacing"
+    android:layout_marginStart="@dimen/half_dynamic_spacing"
+    android:layout_marginEnd="@dimen/full_dynamic_spacing"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBaseline_toBaselineOf="@id/games_threshold_label"
+    tools:text="4"/>
 
 <!--TODO: Add RecyclerView with LinearLayoutManager and vertical orientation to display List<Ranking>-->
 

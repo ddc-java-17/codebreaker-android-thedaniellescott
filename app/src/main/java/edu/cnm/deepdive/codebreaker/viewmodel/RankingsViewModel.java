@@ -46,7 +46,9 @@ public class RankingsViewModel extends ViewModel implements DefaultLifecycleObse
     pending.clear();
     repository.getRankings(codeLength, gamesThreshold)
         .subscribe(
-            rankings::postValue,
+            value -> {
+              rankings.postValue(value);
+            },
             this::postThrowable,
             pending
         );
