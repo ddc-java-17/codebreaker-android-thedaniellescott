@@ -88,6 +88,71 @@
     app:layout_constraintBaseline_toBaselineOf="@id/games_threshold_label"
     tools:text="4"/>
 
+  <LinearLayout
+    android:id="@+id/header_row"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/half_dynamic_spacing"
+    android:paddingTop="@dimen/half_static_spacing"
+    android:paddingHorizontal="@dimen/half_dynamic_spacing"
+    android:gravity="start|bottom"
+    android:theme="@style/AppTheme.RankingList.Header"
+    app:layout_constraintTop_toBottomOf="@id/games_threshold">
+
+    <!--  TODO: Add integer resources for magic numbers-->
+    <TextView
+      android:id="@+id/rank"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/half_static_spacing"
+      android:layout_weight="3"
+      android:text="@string/rank_header_label"
+      style="@style/RankAlignment"/>
+
+    <TextView
+      android:id="@+id/display_name"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/half_static_spacing"
+      android:text="@string/display_name_header_label"
+      android:layout_weight="9"/>
+
+    <TextView
+      android:id="@+id/avg_guess_count"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/half_static_spacing"
+      android:layout_weight="5"
+      android:text="@string/avg_guess_count_header"
+      style="@style/NumberAlignment"
+      />
+
+    <TextView
+      android:id="@+id/avg_duration"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/half_static_spacing"
+      android:layout_weight="7"
+      android:text="@string/avg_duration_header"
+      style="@style/NumberAlignment"
+      />
+
+  </LinearLayout>
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rankings"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    android:theme="@style/AppTheme.RankingList"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    app:layout_constraintTop_toBottomOf="@id/header_row"
+    app:layout_constraintBottom_toBottomOf="parent"
+    tools:listitem="@layout/item_ranks"/>
+
+
+
 <!--TODO: Add RecyclerView with LinearLayoutManager and vertical orientation to display List<Ranking>-->
 
 <!--TODO: Create item_rankings resource for individual items along with a RecyclerViewAdapter to holdthose items.-->

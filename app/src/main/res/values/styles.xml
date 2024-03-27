@@ -58,4 +58,20 @@
     <item name="itemTextColor">@color/navigation_item_foreground</item>
   </style>
 
+  <style name="AppTheme.RankingList" parent="TextAppearance.Material3.BodyMedium">
+    <item name="android:textAlignment">textStart</item>
+  </style>
+
+  <style name="NumberAlignment">
+    <item name="android:textAlignment">textEnd</item>
+  </style>
+
+  <style name="RankAlignment">
+    <item name="android:textAlignment">center</item>
+  </style>
+
+  <style name="AppTheme.RankingList.Header">
+    <item name="android:textFontWeight">700</item>
+  </style>
+
 </resources>
