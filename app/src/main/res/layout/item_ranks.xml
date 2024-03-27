@@ -14,7 +14,7 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/half_static_spacing"
-    android:layout_weight="3"
+    android:layout_weight="2"
     style="@style/RankAlignment"
     tools:text="1"/>
 
@@ -24,14 +24,14 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/half_static_spacing"
     android:layout_weight="9"
-    tools:text="user_naminator"/>
+    tools:text="user_naminator_2000"/>
 
   <TextView
     android:id="@+id/avg_guess_count"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/half_static_spacing"
-    android:layout_weight="5"
+    android:layout_weight="6"
     style="@style/NumberAlignment"
     tools:text="5.564"/>
 

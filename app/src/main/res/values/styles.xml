@@ -58,7 +58,7 @@
     <item name="itemTextColor">@color/navigation_item_foreground</item>
   </style>
 
-  <style name="AppTheme.RankingList" parent="TextAppearance.Material3.BodyMedium">
+  <style name="AppTheme.RankingList">
     <item name="android:textAlignment">textStart</item>
   </style>
 

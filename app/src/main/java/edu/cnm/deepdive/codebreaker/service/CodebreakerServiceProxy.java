@@ -24,13 +24,19 @@ import retrofit2.http.Query;
 public interface CodebreakerServiceProxy {
 
   @POST("games")
-  Single<Game> startGame(@Body Game game, @Header("Authorization") String bearerToken);
+  Single<Game> startGame(
+      @Body Game game,
+      @Header("Authorization") String bearerToken);
 
   @GET("games/{id}")
-  Single<Game> getGame(@Path("id") String id, @Header("Authorization") String bearerToken);
+  Single<Game> getGame(
+      @Path("id") String id,
+      @Header("Authorization") String bearerToken);
 
   @POST("games/{id}/guesses")
-  Single<Guess> submitGuess(@Path("id") String gameId, @Body Guess guess,
+  Single<Guess> submitGuess(
+      @Path("id") String gameId,
+      @Body Guess guess,
       @Header("Authorization") String bearerToken);
 
   @GET("rankings")

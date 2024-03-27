@@ -39,6 +39,7 @@
   <string name="display_name_header_label">Name</string>
   <string name="avg_guess_count_header">Avg. Guesses</string>
   <string name="avg_duration_header">Avg. Time</string>
+  <string name="guess_count_format">%.2f</string>
 
 
 </resources>
