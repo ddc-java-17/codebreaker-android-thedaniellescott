@@ -6,6 +6,8 @@
   <string name="guess_header">Guess</string>
   <string name="correct_header">Correct</string>
   <string name="close_header">Close</string>
+  <string name="nav_open">Open navigation drawer</string>
+  <string name="nav_close">Close navigation drawer</string>
 
   <string name="guess_hint">Text of guess (ABCDEF)</string>
   <string name="submit_description">Submit guess to service.</string>
@@ -20,11 +22,24 @@
   <string name="timestamp_header">Date</string>
   <string name="duration_format">%1$d:%2$02d:%3$04.1f</string>
   <string name="game_fragment_label">@string/app_name</string>
-  <string name="scores_fragment_label">Scores</string>
+  <string name="scores_fragment_label">My Scores</string>
   <string name="settings_fragment_label">Settings</string>
   <string name="go_to_scores_description">Go to scores screen</string>
   <string name="clear_scores_description">Clear scores</string>
   <string name="rank_header">#</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="ranks_fragment_label">Ranks</string>
+  <string name="game_menu_label">Play</string>
+  <string name="games_threshold_key">games_threshold</string>
+  <string name="games_threshold_title">Threshold of games played for ranking</string>
+  <string name="games_threshold_summary">Minimum number of games a user must player at specified code length to be included in rankings.</string>
+  <string name="games_threshold_label">Games threshold</string>
+  <string name="rank_header_label">#</string>
+  <string name="display_name_header_label">Name</string>
+  <string name="avg_guess_count_header">Avg. Guesses</string>
+  <string name="avg_duration_header">Avg. Time</string>
+  <string name="guess_count_format">%.2f</string>
 
 
 </resources>

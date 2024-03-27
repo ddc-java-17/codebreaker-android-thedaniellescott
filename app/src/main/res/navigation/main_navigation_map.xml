@@ -5,39 +5,39 @@
   android:id="@+id/main_navigation_map"
   app:startDestination="@id/game_fragment">
 
+  <action
+    android:id="@+id/navigate_to_game"
+    app:destination="@id/game_fragment"/>
+
+  <action
+    android:id="@+id/navigate_to_scores"
+    app:destination="@id/scores_fragment"/>
+
+  <action
+    android:id="@+id/navigate_to_ranks"
+    app:destination="@id/ranks_fragment"/>
+
+  <action
+    android:id="@+id/navigate_to_settings"
+    app:destination="@id/settings_fragment"/>
+
   <fragment
     android:id="@+id/game_fragment"
     android:name="edu.cnm.deepdive.codebreaker.controller.GameFragment"
     android:label="@string/game_fragment_label"
-    tools:layout="@layout/fragment_game">
+    tools:layout="@layout/fragment_game"/>
 
-    <action
-      android:id="@+id/navigate_to_scores"
-      app:destination="@id/scores_fragment">
+  <fragment
+    android:id="@+id/scores_fragment"
+    android:name="edu.cnm.deepdive.codebreaker.controller.ScoresFragment"
+    android:label="@string/scores_fragment_label"
+    tools:layout="@layout/fragment_scores"/>
 
-      <argument
-        android:name="code_length"
-        app:argType="integer"/>
-
-    </action>
-
-    <action
-      android:id="@+id/navigate_to_settings"
-      app:destination="@id/settings_fragment"/>
-
-  </fragment>
-
-<fragment
-  android:id="@+id/scores_fragment"
-  android:name="edu.cnm.deepdive.codebreaker.controller.ScoresFragment"
-  android:label="@string/scores_fragment_label"
-  tools:layout="@layout/fragment_scores">
-
-  <argument
-    android:name="code_length"
-    app:argType="integer"/>
-
-</fragment>
+  <fragment
+    android:id="@+id/ranks_fragment"
+    android:name="edu.cnm.deepdive.codebreaker.controller.RanksFragment"
+    android:label="@string/ranks_fragment_label"
+    tools:layout="@layout/fragment_ranks"/>
 
   <fragment
     android:id="@+id/settings_fragment"

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:orientation="horizontal"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:paddingVertical="@dimen/half_static_spacing"
+  android:paddingHorizontal="@dimen/half_dynamic_spacing"
+  android:gravity="start|center_vertical">
+
+<!--  TODO: Add integer resources for magic numbers-->
+  <TextView
+    android:id="@+id/rank"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_static_spacing"
+    android:layout_weight="2"
+    style="@style/RankAlignment"
+    tools:text="1"/>
+
+  <TextView
+    android:id="@+id/display_name"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_static_spacing"
+    android:layout_weight="9"
+    tools:text="user_naminator_2000"/>
+
+  <TextView
+    android:id="@+id/avg_guess_count"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_static_spacing"
+    android:layout_weight="6"
+    style="@style/NumberAlignment"
+    tools:text="5.564"/>
+
+  <TextView
+    android:id="@+id/avg_duration"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_static_spacing"
+    android:layout_weight="7"
+    style="@style/NumberAlignment"
+    tools:text="5:06.878"/>
+
+</LinearLayout>
