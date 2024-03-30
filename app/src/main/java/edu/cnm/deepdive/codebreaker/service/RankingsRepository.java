@@ -20,7 +20,7 @@ public class RankingsRepository {
   private final CodebreakerServiceProxy serviceProxy;
   private final GoogleSignInService signInService;
   private final Scheduler scheduler;
-private final int poolSize;
+  private final int poolSize;
 
   @Inject
   RankingsRepository(@ApplicationContext Context context, CodebreakerServiceProxy serviceProxy,
