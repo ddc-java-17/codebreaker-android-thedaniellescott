@@ -64,6 +64,7 @@ public class ScoresFragment extends Fragment implements OnSeekBarChangeListener 
           GameResultsAdapter adapter = new GameResultsAdapter(requireContext(), gameResults);
           binding.gameResults.setAdapter(adapter);
         });
+    viewModel.setAllUsers(allUsers);
     binding.codeLength.setProgress(binding.codeLength.getMax());
     binding.codeLength.setProgress(binding.codeLength.getMin());
     CodebreakerViewModel codebreakerViewModel =
