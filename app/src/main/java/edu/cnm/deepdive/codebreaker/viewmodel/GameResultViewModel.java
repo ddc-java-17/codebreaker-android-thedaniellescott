@@ -94,11 +94,11 @@ public class GameResultViewModel extends ViewModel implements DefaultLifecycleOb
         );
   }
 
-  private static void postThrowable(Throwable throwable) {
+  private void postThrowable(Throwable throwable) {
     Log.e(TAG, throwable.getMessage(), throwable);
   }
 
-  private class CodeLengthAllUsersLiveData extends MediatorLiveData {
+  private static class CodeLengthAllUsersLiveData extends MediatorLiveData {
 
     private final LiveData<Integer> codeLength;
     private final LiveData<Boolean> allUsers;
