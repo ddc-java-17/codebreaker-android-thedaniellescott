@@ -6,7 +6,7 @@ kotlin="1.9.22"
 
 # Core Android plugin and library versions
 #noinspection GradleDependency
-android-gradle = "8.2.3"
+android-gradle = "8.2.2"
 app-compat = "1.6.1"
 lifecycle = "2.7.0"
 navigation = "2.7.7"
