@@ -33,12 +33,14 @@ public class RanksFragment extends Fragment {
         (SimpleOnSeekBarChangeListener) (seekBar, progress, fromUser) -> {
           binding.codeLengthValue.setText(String.valueOf(progress));
           rankingsViewModel.fetch(progress, binding.gamesThreshold.getProgress());
+          binding.waitIndicator.setVisibility(View.VISIBLE);
         }
     );
     binding.gamesThreshold.setOnSeekBarChangeListener(
         (SimpleOnSeekBarChangeListener) (seekBar, progress, fromUser) -> {
           binding.gamesThresholdValue.setText(String.valueOf(progress));
           rankingsViewModel.fetch(binding.codeLength.getProgress(), progress);
+          binding.waitIndicator.setVisibility(View.VISIBLE);
         }
     );
     return binding.getRoot();
@@ -51,8 +53,10 @@ public class RanksFragment extends Fragment {
     LifecycleOwner owner = getViewLifecycleOwner();
     rankingsViewModel = provider.get(RankingsViewModel.class);
     rankingsViewModel.getRankings()
-        .observe(owner, (rankings) ->
-      binding.rankings.setAdapter(new RanksAdapter(requireContext(), rankings)));
+        .observe(owner, (rankings) -> {
+          binding.rankings.setAdapter(new RanksAdapter(requireContext(), rankings));
+          binding.waitIndicator.setVisibility(View.GONE);
+        });
     CodebreakerViewModel codebreakerViewModel = provider.get(CodebreakerViewModel.class);
     codebreakerViewModel.getGame().observe(owner, (game) -> {
       // TODO: 3/18/2024 If we have both codeLength and gamesThreshold, invoke RankingsViewModel.fetch(codeLength, gamesThreshold)

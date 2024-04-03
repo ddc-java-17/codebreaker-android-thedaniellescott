@@ -29,7 +29,7 @@
 
   <fragment
     android:id="@+id/scores_fragment"
-    android:name="edu.cnm.deepdive.codebreaker.controller.ScoresFragment"
+    android:name="edu.cnm.deepdive.codebreaker.controller.TabbedScoresFragment"
     android:label="@string/scores_fragment_label"
     tools:layout="@layout/fragment_scores"/>
 

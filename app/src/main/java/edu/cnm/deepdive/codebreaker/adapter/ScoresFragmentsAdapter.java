@@ -1,8 +1,10 @@
 package edu.cnm.deepdive.codebreaker.adapter;
 
+import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+import edu.cnm.deepdive.codebreaker.controller.ScoresFragment;
 
 public class ScoresFragmentsAdapter extends FragmentStateAdapter {
 
@@ -13,8 +15,11 @@ public class ScoresFragmentsAdapter extends FragmentStateAdapter {
   @NonNull
   @Override
   public Fragment createFragment(int position) {
-    return null;
-    // TODO: 4/3/2024 Create an instance of ScoresFragment and pass it a bundle of arguments.
+    Fragment fragment = new ScoresFragment();
+    Bundle args = new Bundle();
+    args.putBoolean(ScoresFragment.ALL_USERS_KEY, position > 0);
+    fragment.setArguments(args);
+    return fragment;
   }
 
   @Override

@@ -12,6 +12,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy;
 import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.codebreaker.R;
+import edu.cnm.deepdive.codebreaker.adapter.ScoresFragmentsAdapter;
 import edu.cnm.deepdive.codebreaker.databinding.FragmentTabbedScoresBinding;
 
 @AndroidEntryPoint
@@ -31,9 +32,10 @@ public class TabbedScoresFragment extends Fragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    // TODO: 4/3/2024 Read allUsers argument.
     scoreTabNames = getResources().getStringArray(R.array.score_tab_names);
-    // TODO: 4/3/2024 Connect viewpager with tab layout.
+    ScoresFragmentsAdapter adapter = new ScoresFragmentsAdapter(this);
+    binding.scoresFragmentHost.setOffscreenPageLimit(1);
+    binding.scoresFragmentHost.setAdapter(adapter);
     new TabLayoutMediator(binding.scoresTabs, binding.scoresFragmentHost,
         (tab, position) -> tab.setText(scoreTabNames[position]))
         .attach();
