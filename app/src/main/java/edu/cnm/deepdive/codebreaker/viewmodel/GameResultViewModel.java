@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
@@ -25,6 +26,7 @@ public class GameResultViewModel extends ViewModel implements DefaultLifecycleOb
   private final GameResultRepository resultRepository;
   private final UserRepository userRepository;
   private final MutableLiveData<Integer> codeLength;
+  private final MutableLiveData<Boolean> allUsers;
   private final LiveData<List<GameResult>> gameResults;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
@@ -35,8 +37,10 @@ public class GameResultViewModel extends ViewModel implements DefaultLifecycleOb
     this.resultRepository = resultRepository;
     this.userRepository = userRepository;
     codeLength = new MutableLiveData<>();
+    allUsers = new MutableLiveData<>(false);
+    // TODO: 4/3/2024 Trigger refresh of gameResults on change of codeLength OR allUsers.
     gameResults = Transformations.switchMap(codeLength,
-        codeLength -> resultRepository.getAll(codeLength, currentUser));
+        (codeLength) -> resultRepository.getAll(codeLength, allUsers.getValue() ? null : currentUser));
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
     loadCurrentUser();
@@ -48,6 +52,10 @@ public class GameResultViewModel extends ViewModel implements DefaultLifecycleOb
 
   public void setCodeLength(int length) {
     codeLength.setValue(length);
+  }
+
+  public void setAllUsers(boolean allUsers) {
+    this.allUsers.setValue(allUsers);
   }
 
   public LiveData<List<GameResult>> getGameResults() {
@@ -86,8 +94,19 @@ public class GameResultViewModel extends ViewModel implements DefaultLifecycleOb
         );
   }
 
-  private void postThrowable(Throwable throwable) {
+  private static void postThrowable(Throwable throwable) {
     Log.e(TAG, throwable.getMessage(), throwable);
   }
 
+  private class CodeLengthAllUsersLiveData extends MediatorLiveData {
+
+    private final LiveData<Integer> codeLength;
+    private final LiveData<Boolean> allUsers;
+
+    private CodeLengthAllUsersLiveData(LiveData<Integer> codeLength, LiveData<Boolean> allUsers) {
+      this.codeLength = codeLength;
+      this.allUsers = allUsers;
+      // TODO: 4/3/2024 Add sources for both parameters.
+    }
+  }
 }

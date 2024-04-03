@@ -24,14 +24,22 @@ import edu.cnm.deepdive.codebreaker.viewmodel.PreferencesViewModel;
 @AndroidEntryPoint
 public class ScoresFragment extends Fragment implements OnSeekBarChangeListener {
 
+  public static final String ALL_USERS_KEY = "all_users";
+
   private FragmentScoresBinding binding;
   private GameResultViewModel viewModel;
   private int initialCodeLength;
+  private boolean allUsers;
+
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // TODO: 3/11/2024 Read initial codeLength from settings.
+    Bundle args = getArguments();
+    //noinspection DataFlowIssue
+    allUsers = args.getBoolean(ALL_USERS_KEY, false);
+
   }
 
   @Override

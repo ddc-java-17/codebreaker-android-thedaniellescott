@@ -20,4 +20,9 @@
     <item>@color/Violet</item>
   </integer-array>
 
+  <string-array name="score_tab_names">
+    <item>My scores only</item>
+    <item>All on device</item>
+  </string-array>
+
 </resources>
