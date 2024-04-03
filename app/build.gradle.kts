@@ -91,6 +91,7 @@ dependencies {
     implementation(libs.app.compat)
     implementation(libs.constraint.layout)
     implementation(libs.recycler.view)
+    implementation(libs.view.pager)
 
     // Fragment & navigation framework libraries
     implementation(libs.fragment)
